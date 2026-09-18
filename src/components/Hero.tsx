@@ -95,50 +95,23 @@ export default function Hero() {
         {/* Soft green ambient aura glow behind the portrait */}
         <div className="absolute top-1/3 right-1/4 w-[460px] h-[460px] bg-[#2E8B57]/15 rounded-full blur-3xl pointer-events-none" />
 
-        {/* TOP EDGE FADE: Multi-stop ease-in-out gradient fade (top 12-15% of hero height), seamless beige blend below navbar */}
-        <div
-          className="absolute top-0 inset-x-0 h-[12%] lg:h-[13%] xl:h-[15%] min-h-[80px] max-h-[140px] z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to bottom, #F5F0E8 0%, #F5F0E8 8%, rgba(245, 240, 232, 0.95) 22%, rgba(245, 240, 232, 0.82) 38%, rgba(245, 240, 232, 0.60) 54%, rgba(245, 240, 232, 0.35) 72%, rgba(245, 240, 232, 0.12) 88%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
+        {/* TOP EDGE FADE: Blends smoothly where it meets the navbar */}
+        <div className="absolute top-0 inset-x-0 h-16 xl:h-20 bg-gradient-to-b from-[#F5F0E8] via-[#F5F0E8]/70 to-transparent z-20 pointer-events-none" />
 
-        {/* LEFT EDGE FADE: Multi-stop ease-in-out gradient mask spanning 28-30% of image width, perfectly seamless with page background */}
-        <div
-          className="absolute inset-y-0 left-0 w-[28%] xl:w-[30%] z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to right, #F5F0E8 0%, #F5F0E8 8%, rgba(245, 240, 232, 0.96) 20%, rgba(245, 240, 232, 0.85) 35%, rgba(245, 240, 232, 0.65) 50%, rgba(245, 240, 232, 0.42) 68%, rgba(245, 240, 232, 0.20) 82%, rgba(245, 240, 232, 0.05) 94%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
+        {/* LEFT EDGE FADE: Horizontal gradient mask overlay (~15-20% width) blending smoothly into beige text column */}
+        <div className="absolute inset-y-0 left-0 w-36 xl:w-52 bg-gradient-to-r from-[#F5F0E8] via-[#F5F0E8]/75 to-transparent z-20 pointer-events-none" />
 
-        {/* TOP-LEFT CORNER BLEND: Smooth radial ease-in-out transition eliminating any seam at the horizontal/vertical intersection */}
-        <div
-          className="absolute top-0 left-0 w-[38%] h-[22%] z-20 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 0% 0%, #F5F0E8 0%, #F5F0E8 16%, rgba(245, 240, 232, 0.92) 35%, rgba(245, 240, 232, 0.65) 55%, rgba(245, 240, 232, 0.25) 78%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
+        {/* BOTTOM EDGE FADE: Blends smoothly transitioning into the next section */}
+        <div className="absolute bottom-0 inset-x-0 h-20 xl:h-24 bg-gradient-to-t from-[#F5F0E8] via-[#F5F0E8]/75 to-transparent z-20 pointer-events-none" />
 
-        {/* BOTTOM EDGE FADE: Multi-stop ease-in-out gradient transitioning into the next section */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-20 xl:h-28 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to top, #F5F0E8 0%, #F5F0E8 10%, rgba(245, 240, 232, 0.90) 30%, rgba(245, 240, 232, 0.60) 55%, rgba(245, 240, 232, 0.20) 80%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
-
-        {/* Seamless Image Container with mix-blend-multiply and widened 28-30% smooth mask */}
+        {/* Seamless Image Container with mix-blend-multiply and Left-Edge Mask */}
         <div
           className="relative w-full h-full mix-blend-multiply"
           style={{
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, transparent 4%, rgba(0,0,0,0.12) 10%, rgba(0,0,0,0.42) 18%, rgba(0,0,0,0.80) 25%, black 30%)",
+              "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 6%, black 18%, black 100%)",
             maskImage:
-              "linear-gradient(to right, transparent 0%, transparent 4%, rgba(0,0,0,0.12) 10%, rgba(0,0,0,0.42) 18%, rgba(0,0,0,0.80) 25%, black 30%)",
+              "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 6%, black 18%, black 100%)",
           }}
         >
           {/* Full original quality, uncompressed source image, shifted rightwards to touch right edge */}
@@ -156,21 +129,9 @@ export default function Hero() {
       {/* MOBILE FULL-BLEED IMAGE (Edge-to-Edge full width below text content) */}
       <div className="lg:hidden w-full relative h-[460px] sm:h-[560px] mt-4 overflow-hidden mix-blend-multiply">
         {/* Top-edge gradient fade */}
-        <div
-          className="absolute inset-x-0 top-0 h-24 z-10 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to bottom, #F5F0E8 0%, rgba(245, 240, 232, 0.92) 25%, rgba(245, 240, 232, 0.55) 60%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
+        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#F5F0E8] to-transparent z-10 pointer-events-none" />
         {/* Bottom-edge gradient fade */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-24 z-10 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to top, #F5F0E8 0%, rgba(245, 240, 232, 0.92) 25%, rgba(245, 240, 232, 0.55) 60%, rgba(245, 240, 232, 0) 100%)",
-          }}
-        />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0E8] to-transparent z-10 pointer-events-none" />
         
         <Image
           src="/images/hero-main.jpg"
