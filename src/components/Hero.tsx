@@ -5,8 +5,8 @@ import { Star, ArrowRight, Sparkles, ShieldCheck, CheckCircle2 } from "lucide-re
 export default function Hero() {
   return (
     <section className="relative overflow-hidden w-full min-h-[calc(100vh-76px)] flex flex-col lg:flex-row items-center bg-[#F5F0E8]">
-      {/* Subtle green ambient aura blob blending into warm beige */}
-      <div className="absolute top-1/3 left-1/4 w-[420px] h-[420px] bg-[#2E8B57]/10 rounded-full blur-3xl pointer-events-none z-0" />
+      {/* Subtle green ambient aura blob confined to far left behind headline */}
+      <div className="absolute top-1/4 -left-12 w-[320px] h-[320px] bg-[#2E8B57]/8 rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* Main Content Container (Full width, responsive padding, inner max-w ONLY for text block) */}
       <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-20 relative z-20">
@@ -91,25 +91,13 @@ export default function Hero() {
       </div>
 
       {/* DESKTOP FULL-BLEED IMAGE CONTAINER (Spans below navbar to bottom of hero, flush with right edge) */}
-      <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[50%] lg:w-[52%] xl:w-[54%] h-full pointer-events-none overflow-hidden z-10">
-        {/* Soft green ambient aura glow behind the portrait */}
-        <div className="absolute top-1/3 right-1/4 w-[460px] h-[460px] bg-[#2E8B57]/15 rounded-full blur-3xl pointer-events-none" />
-
+      <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[50%] lg:w-[52%] xl:w-[54%] h-full pointer-events-none overflow-hidden z-10 bg-[#F5F0E8]">
         {/* TOP EDGE FADE: Blends smoothly where it meets the navbar */}
         <div
           className="absolute top-0 inset-x-0 h-16 xl:h-20 z-20 pointer-events-none"
           style={{
             background:
               "linear-gradient(to bottom, #F5F0E8 0%, #F5F0E8 15%, transparent 100%)",
-          }}
-        />
-
-        {/* LEFT EDGE FADE OVERLAY: 40% width, exact beige hex #F5F0E8, sits on top of image, under text */}
-        <div
-          className="absolute inset-y-0 left-0 w-[40%] h-full z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to right, #F5F0E8 0%, #F5F0E8 15%, transparent 100%)",
           }}
         />
 
@@ -122,7 +110,7 @@ export default function Hero() {
           }}
         />
 
-        {/* Image Container with mix-blend-multiply (no hard-edged masks or wrappers) */}
+        {/* Image Container with direct mask-image on image element */}
         <div className="relative w-full h-full mix-blend-multiply">
           {/* Full original quality, uncompressed source image, shifted rightwards to touch right edge */}
           <Image
@@ -132,12 +120,18 @@ export default function Hero() {
             priority
             unoptimized
             className="object-cover object-[5%_center] xl:object-[0%_center] filter contrast-[1.02]"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 35%, black 100%)",
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 35%, black 100%)",
+            }}
           />
         </div>
       </div>
 
       {/* MOBILE FULL-BLEED IMAGE (Edge-to-Edge full width below text content) */}
-      <div className="lg:hidden w-full relative h-[460px] sm:h-[560px] mt-4 overflow-hidden mix-blend-multiply">
+      <div className="lg:hidden w-full relative h-[460px] sm:h-[560px] mt-4 overflow-hidden mix-blend-multiply bg-[#F5F0E8]">
         {/* Top-edge gradient fade */}
         <div
           className="absolute inset-x-0 top-0 h-24 z-10 pointer-events-none"
