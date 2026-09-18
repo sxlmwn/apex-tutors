@@ -1,0 +1,183 @@
+"use client";
+
+import React, { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight, Compass } from "lucide-react";
+
+interface LinkItemProps {
+  number: string;
+  heading: string;
+  subheading: string;
+  tag: string;
+  imgSrc: string;
+  href: string;
+}
+
+const links: LinkItemProps[] = [
+  {
+    number: "01",
+    heading: "How It Works",
+    subheading: "Simple 4-step matching & free demo session",
+    tag: "The Process",
+    imgSrc: "/images/how-it-works.jpg",
+    href: "#how-it-works",
+  },
+  {
+    number: "02",
+    heading: "Find a Tutor",
+    subheading: "Connect with LUMS, NUST, AKU, FAST & GIKI mentors",
+    tag: "For Students",
+    imgSrc: "/images/hero-main.jpg",
+    href: "/signup",
+  },
+  {
+    number: "03",
+    heading: "Become a Tutor",
+    subheading: "Teach Matric & FSc students on flexible schedules",
+    tag: "For Scholars",
+    imgSrc: "/images/why-choose-us.jpg",
+    href: "/apply-tutor",
+  },
+  {
+    number: "04",
+    heading: "Our Subjects",
+    subheading: "Comprehensive Federal FBISE & Punjab Board curriculum",
+    tag: "Curriculum",
+    imgSrc: "/images/subjects.jpg",
+    href: "#subjects",
+  },
+  {
+    number: "05",
+    heading: "Cities We Cover",
+    subheading: "DHA, Bahria Town & 7 premier regions across Pakistan",
+    tag: "Locations",
+    imgSrc: "/images/stats-bg.jpg",
+    href: "#cities",
+  },
+];
+
+function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemProps) {
+  const ref = useRef<HTMLAnchorElement | null>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 20, stiffness: 280, mass: 0.5 };
+  const mouseXSpring = useSpring(x, springConfig);
+  const mouseYSpring = useSpring(y, springConfig);
+
+  // Subtle dynamic rotation while tracking mouse movement
+  const rotate = useTransform(mouseXSpring, [0, 800], ["-4deg", "4deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    x.set(e.clientX - rect.left);
+    y.set(e.clientY - rect.top);
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="whileHover"
+      className="relative border-b border-[#E8E1D5] first:border-t"
+    >
+      <Link
+        ref={ref}
+        href={href}
+        onMouseMove={handleMouseMove}
+        className="group flex flex-col md:flex-row md:items-center justify-between py-6 sm:py-8 lg:py-10 transition-colors duration-300 relative z-10"
+      >
+        {/* Left Side: Number + Heading */}
+        <div className="flex items-baseline gap-4 sm:gap-6 lg:gap-8 z-10">
+          <span className="text-xs sm:text-sm font-mono font-bold text-[#A1A1AA] group-hover:text-[#2E8B57] transition-colors duration-300">
+            {number}
+          </span>
+          <motion.span
+            variants={{
+              initial: { x: 0 },
+              whileHover: { x: 10 },
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#18181B] group-hover:text-[#2E8B57] transition-colors duration-300"
+          >
+            {heading}
+          </motion.span>
+        </div>
+
+        {/* Right Side: Subtitle/Tag + Animated Arrow */}
+        <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end gap-4 lg:gap-8 z-10 pl-8 md:pl-0">
+          <div className="flex flex-col md:items-end">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#2E8B57]">
+              {tag}
+            </span>
+            <span className="text-xs sm:text-sm text-[#71717A] group-hover:text-[#18181B] transition-colors duration-300">
+              {subheading}
+            </span>
+          </div>
+
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#DDD3C2] bg-[#FAF7F2] group-hover:bg-[#2E8B57] group-hover:border-[#2E8B57] text-[#18181B] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs group-hover:shadow-md shrink-0">
+            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
+        </div>
+
+        {/* Floating Mouse Cursor Image Thumbnail (Desktop only with spring animation) */}
+        <motion.div
+          style={{
+            top: mouseYSpring,
+            left: mouseXSpring,
+            translateX: "-50%",
+            translateY: "-50%",
+            rotate,
+          }}
+          variants={{
+            initial: { scale: 0, opacity: 0 },
+            whileHover: { scale: 1, opacity: 1 },
+          }}
+          transition={{ type: "spring", stiffness: 350, damping: 22 }}
+          className="pointer-events-none absolute z-30 hidden md:block w-56 sm:w-64 lg:w-72 h-36 sm:h-40 lg:h-44 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/95 bg-[#FAF7F2]"
+        >
+          <Image
+            src={imgSrc}
+            alt={heading}
+            fill
+            sizes="288px"
+            className="object-cover"
+          />
+        </motion.div>
+      </Link>
+    </motion.div>
+  );
+}
+
+export default function HoverImageLinks() {
+  return (
+    <section id="explore" className="py-20 bg-[#F5F0E8] border-t border-[#E8E1D5] relative overflow-hidden">
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1E5638] bg-[#EAE2D4] px-3.5 py-1.5 rounded-full border border-[#DDD3C2]">
+            <Compass className="w-3.5 h-3.5 text-[#2E8B57]" />
+            <span>Interactive Directory</span>
+          </span>
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18181B] tracking-tight">
+            Explore Apex Tutors
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-[#52525B]">
+            Hover over any link to preview Pakistan&apos;s premier Matric &amp; FSc tutoring network.
+          </p>
+        </div>
+
+        {/* Vertical Stacked Hover Links List */}
+        <div className="w-full">
+          {links.map((link) => (
+            <HoverLink key={link.number} {...link} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

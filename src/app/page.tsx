@@ -5,6 +5,7 @@ import TrustVerification from "@/components/TrustVerification";
 import SubjectsBoards from "@/components/SubjectsBoards";
 import CitiesCovered from "@/components/CitiesCovered";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import HoverImageLinks from "@/components/HoverImageLinks";
 import TestimonialsStats from "@/components/TestimonialsStats";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
@@ -33,7 +34,10 @@ export default function Home() {
       {/* 7. Why Choose Us */}
       <WhyChooseUs />
 
-      {/* 8. Testimonial & Stats Section */}
+      {/* 8. Interactive Hover Image Links */}
+      <HoverImageLinks />
+
+      {/* 9. Testimonial & Stats Section */}
       <TestimonialsStats />
 
       {/* 9. CTA Banner */}
