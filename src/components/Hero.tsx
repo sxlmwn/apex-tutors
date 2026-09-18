@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useModal } from "@/context/ModalContext";
+import { MorphingText } from "@/components/ui/morphing-text";
 
 export default function Hero() {
   const { openModal } = useModal();
@@ -19,12 +20,12 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Oversized Dominant Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#18181B] leading-[1.02]">
-            Find the Perfect{" "}
-            <span className="text-[#2E8B57]">Tutor</span>{" "}
-            Near You
-          </h1>
+          {/* Morphing Headline */}
+          <h1 className="sr-only">Apex Tutors — Verified Tutors in Pakistan</h1>
+          <MorphingText
+            texts={["Verified Tutors", "Trusted Results", "Real Progress", "Apex Tutors"]}
+            className="text-[#18181B] font-black tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-center lg:text-left mx-auto lg:mx-0 h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32"
+          />
 
           {/* Subheadline */}
           <p className="text-base sm:text-lg lg:text-xl text-[#52525B] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">

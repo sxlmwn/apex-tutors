@@ -1,45 +1,8 @@
-import Link from "next/link";
-import { Globe } from "lucide-react";
+"use client";
+
+import GsapFlipCard from "@/components/ui/gsap-card-flip";
 
 export default function CitiesCovered() {
-  const cities = [
-    {
-      name: "Karachi",
-      focusAreas: "DHA (Phases 1–8), Clifton, PECHS, Gulshan-e-Iqbal, KDA",
-      tutorCount: "140+ Tutors",
-    },
-    {
-      name: "Lahore",
-      focusAreas: "DHA (Phases 1–9), Bahria Town, Gulberg, Model Town, Cantt",
-      tutorCount: "160+ Tutors",
-    },
-    {
-      name: "Islamabad",
-      focusAreas: "Sectors F-6 to F-11, E-7, DHA Islamabad, Bahria Enclave",
-      tutorCount: "110+ Tutors",
-    },
-    {
-      name: "Rawalpindi",
-      focusAreas: "Bahria Town (Phases 1–8), DHA Phase 1 & 2, Chaklala, Askari",
-      tutorCount: "90+ Tutors",
-    },
-    {
-      name: "Multan",
-      focusAreas: "Multan Cantt, DHA Multan, Gulgasht Colony, Bosan Road",
-      tutorCount: "50+ Tutors",
-    },
-    {
-      name: "Faisalabad",
-      focusAreas: "Canal Road, D Ground, Kohinoor City, Madina Town",
-      tutorCount: "45+ Tutors",
-    },
-    {
-      name: "Bahawalpur",
-      focusAreas: "Model Town A & B, Bahawalpur Cantt, Satellite Town",
-      tutorCount: "35+ Tutors",
-    },
-  ];
-
   return (
     <section id="cities" className="py-24 lg:py-32 bg-[#F5F0E8] border-t border-[#E8E1D5]/60">
       <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
@@ -56,65 +19,27 @@ export default function CitiesCovered() {
           </p>
         </div>
 
-        {/* Cities Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cities.map((city) => (
-            <div
-              key={city.name}
-              className="bg-[#FAF7F2] rounded-2xl p-8 border border-[#E8E1D5]/40 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-[#18181B]">
-                    {city.name}
-                  </h3>
-                  <span className="text-xs font-mono text-[#71717A]">
-                    {city.tutorCount}
-                  </span>
-                </div>
-
-                <p className="mt-3 text-sm text-[#52525B] leading-relaxed">
-                  {city.focusAreas}
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-[#E8E1D5]/60">
-                <Link
-                  href={`/signup?city=${encodeURIComponent(city.name)}`}
-                  className="text-xs font-semibold text-[#18181B] hover:text-[#2E8B57] transition-colors"
-                >
-                  Find Tutor in {city.name} &rarr;
-                </Link>
-              </div>
-            </div>
-          ))}
-
-          {/* 8th Card: Nationwide Remote Online Card (Unified Minimalist Surface) */}
-          <div className="bg-[#FAF7F2] rounded-2xl p-8 border border-[#E8E1D5]/40 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-[#18181B]">
-                  Online Classrooms
-                </h3>
-                <Globe className="w-5 h-5 text-[#18181B]" />
-              </div>
-
-              <p className="mt-3 text-sm text-[#52525B] leading-relaxed">
-                Connect seamlessly from any city across Pakistan via our interactive digital whiteboard.
-              </p>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-[#E8E1D5]/60">
-              <Link
-                href="/signup?mode=online"
-                className="text-xs font-semibold text-[#18181B] hover:text-[#2E8B57] transition-colors"
-              >
-                Join Online &rarr;
-              </Link>
-            </div>
-          </div>
-        </div>
+        {/* GSAP Flip Card Component */}
+        <GsapFlipCard
+          items={[
+            { id: "isb", image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&h=1000&fit=crop", alt: "Islamabad city view", caption: "Islamabad — DHA, Bahria Town & Federal sectors." },
+            { id: "rwp", image: "https://images.unsplash.com/photo-1600100397608-f70cd5aa5e5a?w=800&h=1000&fit=crop", alt: "Rawalpindi cityscape", caption: "Rawalpindi — twin-city coverage alongside Islamabad." },
+            { id: "khi", image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=800&h=1000&fit=crop", alt: "Karachi skyline", caption: "Karachi — Pakistan's largest city, full board coverage." },
+            { id: "lhr", image: "https://images.unsplash.com/photo-1626183411799-3c8072f9b0a6?w=800&h=1000&fit=crop", alt: "Lahore architecture", caption: "Lahore — Punjab Board and Matric/FSc tutoring." },
+            { id: "mul", image: "https://images.unsplash.com/photo-1608889175638-9e2d0a7e5b5f?w=800&h=1000&fit=crop", alt: "Multan cityscape", caption: "Multan — expanding tutor network." },
+            { id: "fsd", image: "https://images.unsplash.com/photo-1590059390047-863dcc0d4890?w=800&h=1000&fit=crop", alt: "Faisalabad city", caption: "Faisalabad — Bahawalpur & Faisalabad region coverage." },
+          ]}
+          title="Cities We Cover"
+          meta="Apex Tutors / Pakistan"
+          description="Currently serving families across seven major cities, expanding city by city."
+          backgroundColor="#F5F0E8"
+          textColor="#18181B"
+          mutedColor="#52525B"
+          rounded={20}
+          showCounter={true}
+        />
       </div>
     </section>
   );
 }
+
