@@ -2,46 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ArrowRight, Sparkles, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 
 export default function Hero() {
   const { openModal } = useModal();
 
   return (
-    <section className="relative overflow-hidden w-full min-h-[calc(100vh-76px)] flex flex-col lg:flex-row items-center bg-[#F5F0E8]">
-      {/* Subtle green ambient aura blob confined to far left behind headline */}
-      <div className="absolute top-1/4 -left-12 w-[320px] h-[320px] bg-[#2E8B57]/8 rounded-full blur-3xl pointer-events-none z-0" />
-
+    <section className="relative overflow-hidden w-full min-h-[calc(100vh-80px)] flex flex-col lg:flex-row items-center bg-[#F5F0E8]">
       {/* Main Content Container (Full width, responsive padding, inner max-w ONLY for text block) */}
-      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-20 relative z-20">
-        <div className="w-full lg:w-[52%] xl:w-[48%] max-w-2xl xl:max-w-3xl space-y-7 text-center lg:text-left">
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-16 lg:py-28 relative z-20">
+        <div className="w-full lg:w-[52%] xl:w-[48%] max-w-2xl xl:max-w-3xl space-y-8 text-center lg:text-left">
           {/* Tag / Category Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAE2D4] border border-[#DDD3C2] text-xs font-bold text-[#1E5638]">
-            <Sparkles className="w-3.5 h-3.5 text-[#2E8B57]" />
-            <span>Verified University-Student Mentors</span>
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
+              Verified University-Student Mentors
+            </span>
           </div>
 
-          {/* Oversized Dominant Portfolio-Style Headline */}
+          {/* Oversized Dominant Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#18181B] leading-[1.02]">
             Find the Perfect{" "}
-            <span className="text-[#2E8B57] inline-block relative">
-              Tutor
-              <svg
-                className="absolute -bottom-2 left-0 w-full text-[#2E8B57]/30 -z-10"
-                height="12"
-                viewBox="0 0 200 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 10C50 3 150 3 198 10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>{" "}
+            <span className="text-[#2E8B57]">Tutor</span>{" "}
             Near You
           </h1>
 
@@ -55,43 +36,27 @@ export default function Hero() {
             <button
               type="button"
               onClick={openModal}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full shadow-lg shadow-emerald-900/20 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-medium text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full transition-all active:scale-95 cursor-pointer"
             >
               Find a Tutor
-              <ArrowRight className="w-5 h-5" />
             </button>
             <Link
               href="/apply-tutor"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-bold text-[#18181B] hover:text-[#2E8B57] bg-transparent hover:bg-white/60 border-2 border-[#18181B]/80 hover:border-[#2E8B57] rounded-full transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-medium text-[#18181B] bg-transparent hover:bg-[#18181B]/5 border border-[#18181B]/20 rounded-full transition-all"
             >
               Become a Tutor
             </Link>
           </div>
 
           {/* Trust Indicators Row */}
-          <div className="pt-6 border-t border-[#E8E1D5] flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-[#52525B]">
-            {/* Star Rating Badge */}
-            <div className="flex items-center gap-2 bg-[#FAF7F2] px-3.5 py-2 rounded-xl border border-[#E8E1D5]">
-              <div className="flex text-amber-500">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <span className="font-bold text-[#18181B]">4.9/5.0</span>
-              <span className="text-[#71717A]">(500+ Reviews)</span>
-            </div>
-
-            {/* Verified Badge */}
-            <div className="flex items-center gap-1.5 font-semibold text-[#18181B] bg-[#FAF7F2] px-3.5 py-2 rounded-xl border border-[#E8E1D5]">
-              <ShieldCheck className="w-4 h-4 text-[#2E8B57]" />
-              <span>500+ Verified Tutors</span>
-            </div>
-
-            {/* Free Demo Badge */}
-            <div className="flex items-center gap-1.5 font-semibold text-[#18181B] bg-[#FAF7F2] px-3.5 py-2 rounded-xl border border-[#E8E1D5]">
-              <CheckCircle2 className="w-4 h-4 text-[#2E8B57]" />
-              <span>100% Free Demo Session</span>
-            </div>
+          <div className="pt-6 border-t border-[#E8E1D5]/60 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs sm:text-sm text-[#52525B]">
+            <span className="flex items-center gap-1.5 font-medium text-[#18181B]">
+              <span className="text-amber-500">★</span> 4.9/5.0 <span className="text-[#71717A] font-normal">(500+ Reviews)</span>
+            </span>
+            <span className="hidden sm:inline text-[#D4CFC7]">•</span>
+            <span className="font-medium text-[#18181B]">500+ Verified Tutors</span>
+            <span className="hidden sm:inline text-[#D4CFC7]">•</span>
+            <span className="font-medium text-[#18181B]">Free Demo Session</span>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Compass } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { springConfig, smoothDragSpring, snappySpring } from "@/lib/motion";
 
 interface LinkItemProps {
@@ -21,7 +21,7 @@ const links: LinkItemProps[] = [
     number: "01",
     heading: "How It Works",
     subheading: "Simple 4-step matching & free demo session",
-    tag: "The Process",
+    tag: "Process",
     imgSrc: "/images/how-it-works.jpg",
     href: "#how-it-works",
   },
@@ -29,7 +29,7 @@ const links: LinkItemProps[] = [
     number: "02",
     heading: "Find a Tutor",
     subheading: "Connect with LUMS, NUST, AKU, FAST & GIKI mentors",
-    tag: "For Students",
+    tag: "Students",
     imgSrc: "/images/hero-main.jpg",
     href: "/signup",
   },
@@ -37,7 +37,7 @@ const links: LinkItemProps[] = [
     number: "03",
     heading: "Become a Tutor",
     subheading: "Teach Matric & FSc students on flexible schedules",
-    tag: "For Scholars",
+    tag: "Scholars",
     imgSrc: "/images/why-choose-us.jpg",
     href: "/apply-tutor",
   },
@@ -68,8 +68,7 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
   const mouseXSpring = useSpring(x, smoothDragSpring);
   const mouseYSpring = useSpring(y, smoothDragSpring);
 
-  // Subtle dynamic rotation while tracking mouse movement
-  const rotate = useTransform(mouseXSpring, [0, 800], ["-4deg", "4deg"]);
+  const rotate = useTransform(mouseXSpring, [0, 800], ["-3deg", "3deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -83,44 +82,44 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
     <motion.div
       initial="initial"
       whileHover="whileHover"
-      className="relative border-b border-[#E8E1D5] first:border-t"
+      className="relative border-b border-[#E8E1D5]/60 first:border-t"
     >
       <Link
         ref={ref}
         href={href}
         onMouseMove={handleMouseMove}
-        className="group flex flex-col md:flex-row md:items-center justify-between py-6 sm:py-8 lg:py-10 transition-colors duration-300 relative z-10"
+        className="group flex flex-col md:flex-row md:items-center justify-between py-8 sm:py-10 transition-colors duration-200 relative z-10"
       >
         {/* Left Side: Number + Heading */}
-        <div className="flex items-baseline gap-4 sm:gap-6 lg:gap-8 z-10">
-          <span className="text-xs sm:text-sm font-mono font-bold text-[#A1A1AA] group-hover:text-[#2E8B57] transition-colors duration-300">
+        <div className="flex items-baseline gap-4 sm:gap-8 z-10">
+          <span className="text-xs sm:text-sm font-mono font-medium text-[#71717A]">
             {number}
           </span>
           <motion.span
             variants={{
               initial: { x: 0 },
-              whileHover: { x: 10 },
+              whileHover: { x: 8 },
             }}
             transition={snappySpring}
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#18181B] group-hover:text-[#2E8B57] transition-colors duration-300"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#18181B] group-hover:text-[#2E8B57] transition-colors duration-200"
           >
             {heading}
           </motion.span>
         </div>
 
-        {/* Right Side: Subtitle/Tag + Animated Arrow */}
-        <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end gap-4 lg:gap-8 z-10 pl-8 md:pl-0">
+        {/* Right Side: Subtitle/Tag + Minimal Circle Arrow */}
+        <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end gap-6 z-10 pl-8 md:pl-0">
           <div className="flex flex-col md:items-end">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#2E8B57]">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#71717A]">
               {tag}
             </span>
-            <span className="text-xs sm:text-sm text-[#71717A] group-hover:text-[#18181B] transition-colors duration-300">
+            <span className="text-xs sm:text-sm text-[#52525B]">
               {subheading}
             </span>
           </div>
 
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#DDD3C2] bg-[#FAF7F2] group-hover:bg-[#2E8B57] group-hover:border-[#2E8B57] text-[#18181B] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs group-hover:shadow-md shrink-0">
-            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <div className="w-10 h-10 rounded-full border border-[#18181B]/20 text-[#18181B] group-hover:border-[#18181B] group-hover:bg-[#18181B] group-hover:text-white flex items-center justify-center transition-all duration-200 shrink-0">
+            <ArrowUpRight className="w-4 h-4" />
           </div>
         </div>
 
@@ -138,7 +137,7 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
             whileHover: { scale: 1, opacity: 1 },
           }}
           transition={springConfig}
-          className="pointer-events-none absolute z-30 hidden md:block w-56 sm:w-64 lg:w-72 h-36 sm:h-40 lg:h-44 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/95 bg-[#FAF7F2]"
+          className="pointer-events-none absolute z-30 hidden md:block w-56 sm:w-64 lg:w-72 h-36 sm:h-40 lg:h-44 rounded-2xl overflow-hidden shadow-xl border border-[#E8E1D5] bg-[#FAF7F2]"
         >
           <Image
             src={imgSrc}
@@ -155,18 +154,17 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
 
 export default function HoverImageLinks() {
   return (
-    <section id="explore" className="py-20 bg-[#F5F0E8] border-t border-[#E8E1D5] relative overflow-hidden">
+    <section id="explore" className="py-24 lg:py-32 bg-[#F5F0E8] border-t border-[#E8E1D5]/60 relative overflow-hidden">
       <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1E5638] bg-[#EAE2D4] px-3.5 py-1.5 rounded-full border border-[#DDD3C2]">
-            <Compass className="w-3.5 h-3.5 text-[#2E8B57]" />
-            <span>Interactive Directory</span>
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
+            Interactive Directory
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18181B] tracking-tight">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
             Explore Apex Tutors
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#52525B]">
+          <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
             Hover over any link to preview Pakistan&apos;s premier Matric &amp; FSc tutoring network.
           </p>
         </div>
