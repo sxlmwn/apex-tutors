@@ -26,3 +26,31 @@ body {
   color: #18181B;
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes cutoutGradientSlide {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.bg-cutout-gradient {
+  background-image: linear-gradient(
+    115deg,
+    #174029 0%,
+    #2E8B57 20%,
+    #6ee7b7 38%,
+    #FAF7F2 48%,
+    #6ee7b7 58%,
+    #2E8B57 78%,
+    #174029 100%
+  );
+  background-size: 200% auto;
+}
+
+.animate-cutout-slide {
+  animation: cutoutGradientSlide 2.6s linear infinite;
+}
+
