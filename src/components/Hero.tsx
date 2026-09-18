@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Star, ArrowRight, Sparkles, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { useModal } from "@/context/ModalContext";
 
 export default function Hero() {
+  const { openModal } = useModal();
+
   return (
     <section className="relative overflow-hidden w-full min-h-[calc(100vh-76px)] flex flex-col lg:flex-row items-center bg-[#F5F0E8]">
       {/* Subtle green ambient aura blob confined to far left behind headline */}
@@ -47,13 +52,14 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full shadow-lg shadow-emerald-900/20 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            <button
+              type="button"
+              onClick={openModal}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full shadow-lg shadow-emerald-900/20 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
             >
               Find a Tutor
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </button>
             <Link
               href="/apply-tutor"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-bold text-[#18181B] hover:text-[#2E8B57] bg-transparent hover:bg-white/60 border-2 border-[#18181B]/80 hover:border-[#2E8B57] rounded-full transition-all"

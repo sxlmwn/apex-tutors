@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2 } from "lucide-react";
+import { useModal } from "@/context/ModalContext";
 
 export default function CtaBanner() {
+  const { openModal } = useModal();
   return (
     <section className="py-16 sm:py-20 bg-[#F5F0E8] border-t border-[#E8E1D5]">
       <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
@@ -29,13 +33,14 @@ export default function CtaBanner() {
 
               {/* CTAs */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link
-                  href="/signup"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-[#1a5234] bg-white hover:bg-[#FAF7F2] rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                <button
+                  type="button"
+                  onClick={openModal}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-[#1a5234] bg-white hover:bg-[#FAF7F2] rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 >
                   Find a Tutor Now
                   <ArrowRight className="w-5 h-5 text-[#2E8B57]" />
-                </Link>
+                </button>
                 <Link
                   href="/apply-tutor"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-full backdrop-blur-xs transition-all"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Compass } from "lucide-react";
+import { springConfig, smoothDragSpring, snappySpring } from "@/lib/motion";
 
 interface LinkItemProps {
   number: string;
@@ -64,9 +65,8 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 280, mass: 0.5 };
-  const mouseXSpring = useSpring(x, springConfig);
-  const mouseYSpring = useSpring(y, springConfig);
+  const mouseXSpring = useSpring(x, smoothDragSpring);
+  const mouseYSpring = useSpring(y, smoothDragSpring);
 
   // Subtle dynamic rotation while tracking mouse movement
   const rotate = useTransform(mouseXSpring, [0, 800], ["-4deg", "4deg"]);
@@ -101,7 +101,7 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
               initial: { x: 0 },
               whileHover: { x: 10 },
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            transition={snappySpring}
             className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#18181B] group-hover:text-[#2E8B57] transition-colors duration-300"
           >
             {heading}
@@ -137,7 +137,7 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
             initial: { scale: 0, opacity: 0 },
             whileHover: { scale: 1, opacity: 1 },
           }}
-          transition={{ type: "spring", stiffness: 350, damping: 22 }}
+          transition={springConfig}
           className="pointer-events-none absolute z-30 hidden md:block w-56 sm:w-64 lg:w-72 h-36 sm:h-40 lg:h-44 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/95 bg-[#FAF7F2]"
         >
           <Image

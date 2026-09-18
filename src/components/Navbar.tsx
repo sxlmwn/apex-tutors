@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { GraduationCap, Menu, X, ArrowRight, ShieldCheck } from "lucide-react";
+import { useModal } from "@/context/ModalContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openModal, toggleDrawer, isDrawerOpen } = useModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,70 +76,36 @@ export default function Navbar() {
               <ShieldCheck className="w-4 h-4 text-[#2E8B57]" />
               Become a Tutor
             </Link>
-            <Link
-              href="/signup"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#2E8B57] hover:bg-[#246e45] rounded-full shadow-sm shadow-emerald-700/20 hover:shadow-md transition-all active:scale-95"
+            <button
+              type="button"
+              onClick={openModal}
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#2E8B57] hover:bg-[#246e45] rounded-full shadow-sm shadow-emerald-700/20 hover:shadow-md transition-all active:scale-95 cursor-pointer"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <div className="flex items-center md:hidden gap-2">
-            <Link
-              href="/signup"
-              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#2E8B57] hover:bg-[#246e45] rounded-full"
-            >
-              Get Started
-            </Link>
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2E8B57]"
-              aria-label="Toggle navigation menu"
+              onClick={openModal}
+              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#2E8B57] hover:bg-[#246e45] rounded-full cursor-pointer"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              Get Started
+            </button>
+            <button
+              type="button"
+              onClick={toggleDrawer}
+              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-[#EAE2D4] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2E8B57] cursor-pointer"
+              aria-label="Toggle navigation drawer"
+            >
+              {isDrawerOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#F5F0E8] border-b border-[#E8E1D5] px-4 pt-3 pb-6 space-y-4 shadow-xl animate-in slide-in-from-top duration-200">
-          <nav className="flex flex-col space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 text-base font-medium text-slate-800 hover:text-[#2E8B57] hover:bg-emerald-50/70 rounded-lg transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-          <div className="pt-3 border-t border-[#E8E1D5] flex flex-col gap-2.5">
-            <Link
-              href="/apply-tutor"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-slate-800 bg-[#FAF7F2] hover:bg-white border border-[#E8E1D5] rounded-xl"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#2E8B57]" />
-              Become a Tutor
-            </Link>
-            <Link
-              href="/signup"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#2E8B57] hover:bg-[#246e45] rounded-xl shadow-xs"
-            >
-              Find a Tutor — Book Free Demo
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
   );
 }

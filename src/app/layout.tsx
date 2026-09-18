@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} font-sans scroll-smooth`}>
       <body className="min-h-screen bg-[#F5F0E8] text-[#18181B] antialiased flex flex-col">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
