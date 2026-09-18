@@ -4,13 +4,13 @@ import { Star, ArrowRight, Sparkles, ShieldCheck, CheckCircle2 } from "lucide-re
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden w-full min-h-[calc(100vh-76px)] flex items-center bg-[#F5F0E8]">
+    <section className="relative overflow-hidden w-full min-h-[calc(100vh-76px)] flex flex-col lg:flex-row items-center bg-[#F5F0E8]">
       {/* Subtle green ambient aura blob blending into warm beige */}
       <div className="absolute top-1/3 left-1/4 w-[420px] h-[420px] bg-[#2E8B57]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-      {/* Main Content Container (Constrained on Left) */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-20">
-        <div className="w-full lg:w-[54%] xl:w-[50%] space-y-7 text-center lg:text-left">
+      {/* Main Content Container (Full width, responsive padding, inner max-w ONLY for text block) */}
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-20 relative z-20">
+        <div className="w-full lg:w-[52%] xl:w-[48%] max-w-2xl xl:max-w-3xl space-y-7 text-center lg:text-left">
           {/* Tag / Category Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAE2D4] border border-[#DDD3C2] text-xs font-bold text-[#1E5638]">
             <Sparkles className="w-3.5 h-3.5 text-[#2E8B57]" />

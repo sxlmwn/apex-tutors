@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="bg-[#161513] text-[#D4CFC7] pt-16 pb-12 border-t border-[#2B2824]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[#2B2824]">
           {/* Col 1: Brand & Bio (2 cols wide on large screens) */}
           <div className="lg:col-span-2 space-y-4">

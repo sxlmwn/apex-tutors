@@ -67,7 +67,7 @@ export default function SubjectsBoards() {
 
   return (
     <section id="subjects" className="py-20 bg-[#F5F0E8] border-t border-[#E8E1D5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-[#1E5638] bg-[#EAE2D4] px-3.5 py-1.5 rounded-full border border-[#DDD3C2]">

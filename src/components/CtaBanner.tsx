@@ -5,7 +5,7 @@ import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2 } from "lucide-react";
 export default function CtaBanner() {
   return (
     <section className="py-16 sm:py-20 bg-[#F5F0E8] border-t border-[#E8E1D5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         <div className="relative overflow-hidden bg-gradient-to-br from-[#2E8B57] via-[#236d44] to-[#1a5234] rounded-3xl text-white shadow-2xl">
           {/* Decorative shapes */}
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
