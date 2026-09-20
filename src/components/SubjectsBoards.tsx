@@ -1,9 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Atom, Stethoscope, Compass, Cpu, BookOpen } from "lucide-react";
+import { Atom, Stethoscope, Compass, Cpu, BookOpen, Sparkles, Globe, GraduationCap } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function SubjectsBoards() {
   const tracks = [
+    {
+      level: "Primary & Middle School",
+      category: "Grades 1 to 8",
+      icon: Sparkles,
+      subjects: "English, Mathematics, General Science, Urdu & Islamiyat",
+      description:
+        "Building foundational confidence, mental math fluency, conceptual science, and interactive reading comprehension.",
+    },
+    {
+      level: "O Level / IGCSE",
+      category: "Cambridge Assessment",
+      icon: Globe,
+      subjects: "Math (Syllabus D/Add Math), Physics, Chemistry, Biology, English Language",
+      description:
+        "Structured past-paper drills, marking-scheme mastery, keyword precision, and topical revision for straight A*s.",
+    },
+    {
+      level: "A Level (AS & A2)",
+      category: "Cambridge & Edexcel",
+      icon: GraduationCap,
+      subjects: "Mathematics, Physics, Chemistry, Biology, Economics & Business",
+      description:
+        "Advanced conceptual clarity, derivation drills, analytical essay techniques, and university entry preparation.",
+    },
     {
       level: "FSc Pre-Medical",
       category: "11th & 12th Grade",
@@ -16,43 +41,43 @@ export default function SubjectsBoards() {
       level: "FSc Pre-Engineering",
       category: "11th & 12th Grade",
       icon: Compass,
-      subjects: "Mathematics, Physics, Chemistry, English",
+      subjects: "Mathematics, Physics, Chemistry, English & Urdu",
       description:
-        "Rigorous step-by-step problem solving, past-paper numerical derivations, and net preparation.",
+        "Mastering calculus shortcuts, derivation steps, and vector numericals tailored to Punjab & Federal board patterns.",
     },
     {
       level: "ICS (Computer Science)",
       category: "11th & 12th Grade",
       icon: Cpu,
-      subjects: "Computer Science, Mathematics, Physics, English",
+      subjects: "Computer Science, Mathematics, Physics / Stats",
       description:
-        "Programming foundations, algorithms, database queries, and advanced board mathematics.",
+        "Practical coding, algorithm flowcharts, and textbook theory memorization for maximum board marks.",
     },
     {
-      level: "Matric Science",
+      level: "Matric Science (9th & 10th)",
       category: "9th & 10th Grade",
       icon: Atom,
-      subjects: "Physics, Chemistry, Biology, Mathematics",
+      subjects: "Physics, Chemistry, Biology / Computer, Math",
       description:
-        "Solid conceptual base for board exams with past 10-year paper drills and presentation skills.",
+        "Building rock-solid foundations before intermediate with board past-paper practice and conceptual clarity.",
     },
     {
-      level: "Matric Arts & General",
-      category: "9th & 10th Grade",
+      level: "General Board Revision",
+      category: "Crash Course",
       icon: BookOpen,
-      subjects: "General Science, General Math, English, Pak Studies",
+      subjects: "High-yield topics, Marking Scheme drills",
       description:
-        "Focused guidance on high-scoring essay writing, grammar rules, and targeted board presentation.",
+        "Intensive 60-day revision camps focusing strictly on expected exam questions and mark-scoring presentation.",
     },
   ];
 
   const boards = [
-    { name: "Federal Board (FBISE)", desc: "Islamabad & Overseas" },
-    { name: "Punjab Board (BISE Lahore)", desc: "Lahore Region" },
-    { name: "BISE Rawalpindi", desc: "Rawalpindi & Cantt" },
-    { name: "BISE Multan & Faisalabad", desc: "South & Central Punjab" },
-    { name: "BISE Bahawalpur", desc: "Bahawalpur District" },
-    { name: "Sindh Board (BSEK / BIEK)", desc: "Karachi Central" },
+    { name: "Cambridge (CAIE / IGCSE)", desc: "O & A Level syllabus schemes" },
+    { name: "Federal Board (FBISE)", desc: "Islamabad, Rawalpindi & Cantonments" },
+    { name: "BISE Lahore & Punjab", desc: "Lahore, Rawalpindi, Multan & Faisalabad" },
+    { name: "Primary Foundations", desc: "Montessori through Grade 8 curriculum" },
+    { name: "Sindh Board & AKU-EB", desc: "Karachi Central & Aga Khan Board" },
+    { name: "BISE Gujranwala & Others", desc: "Gujranwala, Sialkot, Bahawalpur & KPK" },
   ];
 
   return (
@@ -61,13 +86,19 @@ export default function SubjectsBoards() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            Targeted Academic Tracks
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Targeted Academic Tracks
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            Subjects &amp; Boards We Cover
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Subjects &amp; Boards We Cover
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            Specialized 1-on-1 tutoring mapped directly to Federal (FBISE) and Punjab Board syllabus schemes and past-paper patterns.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Comprehensive 1-on-1 tutoring mapped directly to Cambridge (O/A Level), Federal (FBISE), Punjab Board, and Primary curriculums.
+            </ScrollReveal>
           </p>
         </div>
 
@@ -90,13 +121,19 @@ export default function SubjectsBoards() {
             {/* Board Alignment Intro */}
             <div className="lg:col-span-7 space-y-4">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-                FBISE &amp; Punjab Boards Aligned
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Cambridge, FBISE &amp; Punjab Boards Aligned
+                </ScrollReveal>
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight">
-                Master the Pairing Schemes &amp; Board Paper Presentation
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Master the Marking Schemes, Pairing Patterns &amp; Presentation
+                </ScrollReveal>
               </h3>
               <p className="text-sm sm:text-base text-[#52525B] leading-relaxed">
-                Board exams require more than just memorization — paper presentation, solving numericals within margins, and targeting high-weightage chapters makes the difference between 70% and 95%+.
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  From Primary conceptual building blocks to O/A Level marking schemes and Matric/FSc board pairing patterns, our mentors ensure total syllabus mastery.
+                </ScrollReveal>
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                 {boards.map((b) => (
@@ -128,10 +165,14 @@ export default function SubjectsBoards() {
                   </div>
 
                   <h3 className="mt-6 text-xl font-bold text-[#18181B]">
-                    {track.level}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {track.level}
+                    </ScrollReveal>
                   </h3>
                   <p className="mt-2 text-sm text-[#52525B] leading-relaxed">
-                    {track.description}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {track.description}
+                    </ScrollReveal>
                   </p>
 
                   <div className="mt-4 pt-4 border-t border-[#E8E1D5]/60">

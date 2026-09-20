@@ -12,23 +12,27 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Apex Tutors — Find Verified Tutors in Pakistan",
   description:
-    "Connect with verified university-student tutors for Matric and FSc students in Karachi, Lahore, Islamabad, Rawalpindi, Multan, Faisalabad, and Bahawalpur. Free demo class guaranteed.",
+    "Connect with verified university-student tutors for Primary, Matric, FSc, O Level, and A Level students in Karachi, Lahore, Islamabad, Rawalpindi, Multan, Faisalabad, and Bahawalpur. Free demo class guaranteed.",
   keywords: [
     "tutor Pakistan",
+    "O Level tutor",
+    "A Level tutor",
     "Matric tutor",
     "FSc tutor",
+    "Primary school tutor",
     "home tutor Lahore",
     "online tutor Islamabad",
     "tutor Karachi DHA",
     "Bahria Town tutor",
     "FBISE tutor",
+    "Cambridge tutor Pakistan",
     "Punjab board tutor",
   ],
   authors: [{ name: "Apex Tutors" }],
   openGraph: {
     title: "Apex Tutors — Find Verified Tutors in Pakistan",
     description:
-      "Pakistan's premier tutoring platform connecting Matric & FSc students with top-tier university tutors. Book a free demo class today.",
+      "Pakistan's premier tutoring platform connecting Primary, Matric, FSc, O Level & A Level students with top-tier university tutors. Book a free demo class today.",
     type: "website",
     locale: "en_PK",
   },

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ClipboardList, UserCheck, Video, Award } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function HowItWorks() {
   const steps = [
@@ -8,7 +9,7 @@ export default function HowItWorks() {
       number: "01",
       title: "Request a Tutor",
       description:
-        "Select your grade (Matric or FSc), board (Federal or Punjab), and subjects needed.",
+        "Select your level (Primary, Matric, FSc, O Level, or A Level), board/curriculum, and subjects needed.",
       icon: ClipboardList,
     },
     {
@@ -40,13 +41,19 @@ export default function HowItWorks() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            Simple 4-Step Process
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Simple 4-Step Process
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            How Apex Tutors Works
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              How Apex Tutors Works
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            From your initial request to your first free demo, we make finding an exceptional Matric &amp; FSc tutor effortless, safe, and transparent.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              From your initial request to your first free demo, we make finding an exceptional tutor for Primary, Matric, FSc, O &amp; A Level students effortless, safe, and transparent.
+            </ScrollReveal>
           </p>
         </div>
 
@@ -68,11 +75,15 @@ export default function HowItWorks() {
                   </div>
 
                   <h3 className="mt-8 text-xl font-bold text-[#18181B]">
-                    {step.title}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {step.title}
+                    </ScrollReveal>
                   </h3>
 
                   <p className="mt-2.5 text-sm text-[#52525B] leading-relaxed">
-                    {step.description}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {step.description}
+                    </ScrollReveal>
                   </p>
                 </div>
               </div>
@@ -99,13 +110,19 @@ export default function HowItWorks() {
             {/* Content & Details */}
             <div className="lg:col-span-7 space-y-5">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-                Zero Upfront Commitment
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Zero Upfront Commitment
+                </ScrollReveal>
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight">
-                Experience Personalized Learning from Day One
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Experience Personalized Learning from Day One
+                </ScrollReveal>
               </h3>
               <p className="text-base text-[#52525B] leading-relaxed">
-                We believe every student deserves a mentor who understands their exact syllabus pressure. That&apos;s why your first 45-minute lesson is completely free — evaluate your tutor before confirming regular classes.
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  We believe every student deserves a mentor who understands their exact syllabus pressure. That&apos;s why your first 45-minute lesson is completely free — evaluate your tutor before confirming regular classes.
+                </ScrollReveal>
               </p>
 
               <div className="pt-2">

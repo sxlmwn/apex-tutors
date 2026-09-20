@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useModal } from "@/context/ModalContext";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function CtaBanner() {
   const { openModal } = useModal();
@@ -15,15 +16,21 @@ export default function CtaBanner() {
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#A1A1AA]">
-                Zero-Risk Guarantee • 100% Free Demo
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Zero-Risk Guarantee • 100% Free Demo
+                </ScrollReveal>
               </span>
 
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-                Ready to Find Your Tutor?
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Ready to Find Your Tutor?
+                </ScrollReveal>
               </h2>
 
               <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-                Tell us your board, grade, and subject needs. We will match you with a verified university mentor from LUMS, NUST, AKU, FAST, or GIKI in under 24 hours.
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Whether preparing for Primary school, Matric, FSc, O Level, or A Level, tell us your learning goals and we will match you with a verified university mentor in under 24 hours.
+                </ScrollReveal>
               </p>
 
               {/* Two Standardized Buttons */}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { springConfig, smoothDragSpring, snappySpring } from "@/lib/motion";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface LinkItemProps {
   number: string;
@@ -13,6 +14,8 @@ interface LinkItemProps {
   subheading: string;
   tag: string;
   imgSrc: string;
+  alt: string;
+  objectPosition?: string;
   href: string;
 }
 
@@ -22,7 +25,9 @@ const links: LinkItemProps[] = [
     heading: "How It Works",
     subheading: "Simple 4-step matching & free demo session",
     tag: "Process",
-    imgSrc: "/images/how-it-works.jpg",
+    imgSrc: "/images/explore/how-it-works.jpg",
+    alt: "How Apex Tutors matching works",
+    objectPosition: "center 35%",
     href: "#how-it-works",
   },
   {
@@ -30,23 +35,27 @@ const links: LinkItemProps[] = [
     heading: "Find a Tutor",
     subheading: "Connect with LUMS, NUST, AKU, FAST & GIKI mentors",
     tag: "Students",
-    imgSrc: "/images/hero-main.jpg",
+    imgSrc: "/images/explore/find-a-tutor.jpg",
+    alt: "Find a tutor",
+    objectPosition: "center 20%",
     href: "/signup",
   },
   {
     number: "03",
     heading: "Become a Tutor",
-    subheading: "Teach Matric & FSc students on flexible schedules",
+    subheading: "Teach Primary, Board & Cambridge students on flexible schedules",
     tag: "Scholars",
-    imgSrc: "/images/why-choose-us.jpg",
+    imgSrc: "/images/explore/become-a-tutor.jpg",
+    alt: "Become a tutor",
     href: "/apply-tutor",
   },
   {
     number: "04",
     heading: "Our Subjects",
-    subheading: "Comprehensive Federal FBISE & Punjab Board curriculum",
+    subheading: "Cambridge O/A Level, Federal FBISE, Punjab Boards & Primary",
     tag: "Curriculum",
-    imgSrc: "/images/subjects.jpg",
+    imgSrc: "/images/explore/our-subjects.jpg",
+    alt: "Subjects we cover",
     href: "#subjects",
   },
   {
@@ -54,12 +63,13 @@ const links: LinkItemProps[] = [
     heading: "Cities We Cover",
     subheading: "DHA, Bahria Town & 7 premier regions across Pakistan",
     tag: "Locations",
-    imgSrc: "/images/stats-bg.jpg",
+    imgSrc: "/images/explore/cities-we-cover.jpg",
+    alt: "Cities we cover",
     href: "#cities",
   },
 ];
 
-function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemProps) {
+function HoverLink({ number, heading, subheading, tag, imgSrc, alt, objectPosition, href }: LinkItemProps) {
   const ref = useRef<HTMLAnchorElement | null>(null);
 
   const x = useMotionValue(0);
@@ -141,10 +151,11 @@ function HoverLink({ number, heading, subheading, tag, imgSrc, href }: LinkItemP
         >
           <Image
             src={imgSrc}
-            alt={heading}
+            alt={alt}
             fill
             sizes="288px"
-            className="object-cover"
+            className="object-cover object-center"
+            style={objectPosition ? { objectPosition } : undefined}
           />
         </motion.div>
       </Link>
@@ -159,13 +170,19 @@ export default function HoverImageLinks() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            Interactive Directory
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Interactive Directory
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            Explore Apex Tutors
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Explore Apex Tutors
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            Hover over any link to preview Pakistan&apos;s premier Matric &amp; FSc tutoring network.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Hover over any link to preview Pakistan&apos;s premier tutoring network for Primary, Matric, FSc, O &amp; A Level students.
+            </ScrollReveal>
           </p>
         </div>
 

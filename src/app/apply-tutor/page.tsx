@@ -18,11 +18,13 @@ export default function ApplyTutorPage() {
   });
 
   const availableSubjects = [
+    "O / A Level (Cambridge Sciences & Math)",
     "Physics (Matric / FSc)",
     "Chemistry (Organic & Inorganic)",
     "Biology (Zoology / Botany)",
     "Mathematics (Calculus / Algebra)",
     "Computer Science / ICS",
+    "Primary & Middle School (All Subjects)",
     "English & Urdu",
   ];
 
@@ -139,7 +141,7 @@ export default function ApplyTutorPage() {
                   Apply to Become an Apex Tutor
                 </h1>
                 <p className="text-sm text-slate-600">
-                  Empower Matric &amp; FSc students in Pakistan while earning flexible, rewarding income.
+                  Empower Primary, Matric, FSc, O &amp; A Level students in Pakistan while earning flexible, rewarding income.
                 </p>
               </div>
 
@@ -208,12 +210,12 @@ export default function ApplyTutorPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                      Matric / FSc Score or Grade *
+                      Academic Score / Grades (Board or Cambridge) *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. 1020/1100 (FSc) or 3 A*s"
+                      placeholder="e.g. 1020/1100 (FSc) or 3 A*s (A Level)"
                       value={formData.fscMarks}
                       onChange={(e) => setFormData({ ...formData, fscMarks: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm"

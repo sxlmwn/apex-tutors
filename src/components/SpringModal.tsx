@@ -152,10 +152,13 @@ export default function SpringModal() {
                         onChange={(e) => setFormData({ ...formData, classLevel: e.target.value })}
                         className="w-full px-3.5 py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
                       >
+                        <option value="Primary (Grades 1-8)">Primary (Grades 1-8)</option>
                         <option value="Matric (9th / 10th)">Matric (9th / 10th)</option>
                         <option value="FSc Pre-Engineering">FSc Pre-Engineering</option>
                         <option value="FSc Pre-Medical">FSc Pre-Medical</option>
                         <option value="ICS (Computer Science)">ICS (Computer Science)</option>
+                        <option value="O Level">O Level (Cambridge / Edexcel)</option>
+                        <option value="A Level">A Level (AS / A2)</option>
                       </select>
                     </div>
 

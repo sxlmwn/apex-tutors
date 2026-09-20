@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useModal } from "@/context/ModalContext";
 import { MorphingText } from "@/components/ui/morphing-text";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Hero() {
   const { openModal } = useModal();
@@ -16,7 +17,9 @@ export default function Hero() {
           {/* Tag / Category Badge */}
           <div>
             <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-              Verified University-Student Mentors
+              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                Verified University-Student Mentors
+              </ScrollReveal>
             </span>
           </div>
 
@@ -24,12 +27,14 @@ export default function Hero() {
           <h1 className="sr-only">Apex Tutors — Verified Tutors in Pakistan</h1>
           <MorphingText
             texts={["Verified Tutors", "Trusted Results", "Real Progress", "Apex Tutors"]}
-            className="text-[#18181B] font-black tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-center lg:text-left mx-auto lg:mx-0 h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32"
+            className="text-[#18181B] font-black tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-[5.25rem] text-center lg:text-left mx-auto lg:mx-0 h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32"
           />
 
           {/* Subheadline */}
           <p className="text-base sm:text-lg lg:text-xl text-[#52525B] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-            1-on-1 tutoring by high-achieving university scholars from LUMS, NUST, AKU, FAST &amp; GIKI. Customized for Federal and Punjab Boards across DHA, Bahria Town &amp; Islamabad.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              1-on-1 tutoring by high-achieving university scholars from LUMS, NUST, AKU, FAST &amp; GIKI. Tailored for Primary, Matric, FSc, O Level &amp; A Level students across DHA, Bahria Town &amp; major cities nationwide.
+            </ScrollReveal>
           </p>
 
           {/* CTA Buttons */}

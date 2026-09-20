@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DollarSign, Award, Laptop } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function WhyChooseUs() {
   const benefits = [
@@ -13,13 +14,13 @@ export default function WhyChooseUs() {
       title: "Verified Top University Tutors",
       icon: Award,
       description:
-        "Learn from high-achieving students from LUMS, NUST, AKU, FAST, and GIKI who recently aced the exact board examinations your child is preparing for.",
+        "Learn exclusively from mentors actively enrolled at LUMS, NUST, AKU, FAST, and GIKI who scored top marks in their Board or Cambridge examinations.",
     },
     {
-      title: "Flexible Online & In-Person Classes",
+      title: "Online or In-Home Tutoring",
       icon: Laptop,
       description:
-        "Whether you prefer interactive digital whiteboard classrooms from home or screened in-person tutoring in select neighborhoods, we adapt to your routine.",
+        "Choose flexible learning modes: in-person sessions across covered residential sectors or live 1-on-1 digital classes nationwide.",
     },
   ];
 
@@ -29,13 +30,19 @@ export default function WhyChooseUs() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            The Apex Advantage
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              The Apex Advantage
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            Why Parents &amp; Students Choose Apex
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Why Parents &amp; Students Choose Apex
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            We bridge the gap between expensive, impersonal academies and unvetted tutors with a dedicated peer-mentorship model.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              We bridge the gap between expensive, impersonal academies and unvetted tutors with a dedicated peer-mentorship model.
+            </ScrollReveal>
           </p>
         </div>
 
@@ -58,13 +65,19 @@ export default function WhyChooseUs() {
             {/* Right Column: Key Philosophy */}
             <div className="lg:col-span-7 space-y-4">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-                Peer-to-Peer Mentorship Model
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Peer-to-Peer Mentorship Model
+                </ScrollReveal>
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight leading-snug">
-                Confident, Focused Learning Tailored to Every Student
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Confident, Focused Learning Tailored to Every Student
+                </ScrollReveal>
               </h3>
               <p className="text-sm sm:text-base text-[#52525B] leading-relaxed">
-                Traditional academies cram 50+ students in one lecture hall where individual doubts get ignored. With Apex Tutors, your child receives 100% dedicated 1-on-1 attention from mentors who graduated at the top of their class.
+                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                  Traditional academies cram 50+ students in one lecture hall where individual doubts get ignored. With Apex Tutors, your child receives 100% dedicated 1-on-1 attention from mentors who graduated at the top of their class.
+                </ScrollReveal>
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 text-sm text-[#18181B]">
@@ -102,11 +115,15 @@ export default function WhyChooseUs() {
                   <Icon className="w-5 h-5 text-[#18181B]" />
 
                   <h3 className="mt-8 text-xl font-bold text-[#18181B]">
-                    {benefit.title}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {benefit.title}
+                    </ScrollReveal>
                   </h3>
 
                   <p className="mt-3 text-sm text-[#52525B] leading-relaxed">
-                    {benefit.description}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {benefit.description}
+                    </ScrollReveal>
                   </p>
                 </div>
               </div>

@@ -1,3 +1,5 @@
+import ScrollReveal from "@/components/ui/ScrollReveal";
+
 export default function TestimonialsStats() {
   const stats = [
     { value: "500+", label: "Students Mentored" },
@@ -32,11 +34,11 @@ export default function TestimonialsStats() {
     },
     {
       name: "Hamza Naveed",
-      role: "10th Grade Matric Science",
+      role: "O Level / IGCSE Candidate",
       location: "DHA Phase 6, Karachi",
-      board: "Sindh Board",
+      board: "Cambridge (CAIE)",
       content:
-        "My mathematics marks used to hold me back. My mentor from FAST walked me through step-by-step problem sets on an interactive online whiteboard. The 1-on-1 pacing made all the difference.",
+        "My mathematics and physics past papers used to hold me back. My mentor from FAST walked me through step-by-step problem sets and variant past papers on an interactive digital whiteboard. The 1-on-1 pacing made all the difference for my A*.",
     },
   ];
 
@@ -46,13 +48,19 @@ export default function TestimonialsStats() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            Real Stories, Real Results
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Real Stories, Real Results
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            Trusted by Families Across Pakistan
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Trusted by Families Across Pakistan
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            See how our university-student mentors are helping Matric and FSc candidates conquer tough syllabi and achieve board distinctions.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              See how our university-student mentors are helping Primary, Matric, FSc, O Level, and A Level students conquer tough syllabi and achieve academic distinctions.
+            </ScrollReveal>
           </p>
         </div>
 
@@ -81,14 +89,20 @@ export default function TestimonialsStats() {
             >
               <div>
                 <p className="text-sm sm:text-base text-[#18181B] leading-relaxed">
-                  &ldquo;{t.content}&rdquo;
+                  &ldquo;
+                  <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                    {t.content}
+                  </ScrollReveal>
+                  &rdquo;
                 </p>
               </div>
 
               <div className="mt-8 pt-4 border-t border-[#E8E1D5]/60 flex items-end justify-between">
                 <div>
                   <h4 className="text-sm font-bold text-[#18181B]">
-                    {t.name}
+                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                      {t.name}
+                    </ScrollReveal>
                   </h4>
                   <p className="text-xs text-[#71717A] mt-0.5">
                     {t.role} • {t.location}

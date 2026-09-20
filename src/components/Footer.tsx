@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { GraduationCap } from "lucide-react";
+import { ClipPathLinks } from "@/components/ui/clip-path-links";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,7 +27,9 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-[#71717A] leading-relaxed max-w-sm">
-              Connecting Matric &amp; FSc students across Pakistan with verified university scholars from LUMS, NUST, AKU, FAST, and GIKI.
+              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                Connecting Primary, Matric, FSc, O Level, and A Level students across Pakistan with verified university scholars from LUMS, NUST, AKU, FAST, and GIKI.
+              </ScrollReveal>
             </p>
 
             <div className="pt-2 flex flex-col gap-2 text-xs text-[#71717A]">
@@ -45,12 +49,18 @@ export default function Footer() {
               </a>
               <span>Serving DHA, Bahria Town &amp; Major Cities Nationwide</span>
             </div>
+
+            <div className="w-full max-w-xs pt-2">
+              <ClipPathLinks />
+            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              Navigation
+              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                Navigation
+              </ScrollReveal>
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -89,27 +99,34 @@ export default function Footer() {
           {/* Col 3: Academic Tracks */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              Academic Tracks
+              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                Academic Tracks
+              </ScrollReveal>
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
+                <Link href="/signup?grade=Primary" className="hover:text-white transition-colors">
+                  Primary &amp; Middle School
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup?grade=O%20Level" className="hover:text-white transition-colors">
+                  O Level / IGCSE (Cambridge)
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup?grade=A%20Level" className="hover:text-white transition-colors">
+                  A Level (AS &amp; A2)
+                </Link>
+              </li>
+              <li>
                 <Link href="/signup?grade=FSc%20Pre-Medical" className="hover:text-white transition-colors">
-                  FSc Pre-Medical
-                </Link>
-              </li>
-              <li>
-                <Link href="/signup?grade=FSc%20Pre-Engineering" className="hover:text-white transition-colors">
-                  FSc Pre-Engineering
-                </Link>
-              </li>
-              <li>
-                <Link href="/signup?grade=ICS" className="hover:text-white transition-colors">
-                  ICS (Computer Science)
+                  FSc (Pre-Medical &amp; Pre-Eng)
                 </Link>
               </li>
               <li>
                 <Link href="/signup?grade=Matric%20Science" className="hover:text-white transition-colors">
-                  Matric Science
+                  Matric Science &amp; Arts
                 </Link>
               </li>
               <li>
@@ -123,7 +140,9 @@ export default function Footer() {
           {/* Col 4: Priority Cities */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              Cities
+              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                Cities
+              </ScrollReveal>
             </h3>
             <ul className="space-y-2 text-xs">
               <li>

@@ -164,13 +164,15 @@ export default function SignUpPage() {
                     onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm bg-white"
                   >
+                    <option value="Primary">Primary &amp; Middle (Grades 1-8)</option>
+                    <option value="O Level">O Level / IGCSE (Cambridge / Edexcel)</option>
+                    <option value="A Level">A Level (AS &amp; A2)</option>
                     <option value="FSc Pre-Medical">FSc Pre-Medical (Part 1/2)</option>
                     <option value="FSc Pre-Engineering">FSc Pre-Engineering (Part 1/2)</option>
                     <option value="ICS">ICS Computer Science</option>
                     <option value="Matric Science 10th">Matric Science (10th)</option>
                     <option value="Matric Science 9th">Matric Science (9th)</option>
                     <option value="Matric Arts/General">Matric Arts / General</option>
-                    <option value="O/A Levels">O / A Levels (Bridging)</option>
                   </select>
                 </div>
                 <div>
@@ -182,6 +184,8 @@ export default function SignUpPage() {
                     onChange={(e) => setFormData({ ...formData, board: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm bg-white"
                   >
+                    <option value="Cambridge (CAIE / Edexcel)">Cambridge (CAIE / Edexcel)</option>
+                    <option value="Primary School Curriculum">Primary School Curriculum</option>
                     <option value="Federal Board (FBISE)">Federal Board (FBISE)</option>
                     <option value="Punjab Board (BISE Lahore)">Punjab Board (BISE Lahore)</option>
                     <option value="BISE Rawalpindi">BISE Rawalpindi</option>

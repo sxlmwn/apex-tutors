@@ -48,11 +48,9 @@ export default function CutoutTextLoader({
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          key="apex-cutout-loader"
-          variants={loaderVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          key="cutout-overlay"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
           className="fixed inset-0 w-full h-full z-[9999] flex items-center justify-center bg-[#F5F0E8] overflow-hidden select-none"
         >
           {/* Layer 0: Background animated moving gradient underlay (hover.dev reference pattern) */}

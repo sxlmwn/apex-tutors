@@ -57,7 +57,10 @@ export interface GsapFlipCardItem {
   id?: string | number;
   image: string;
   alt?: string;
+  title?: string;
+  description?: string;
   caption?: string;
+  objectPosition?: string;
 }
 
 export interface GsapFlipCardProps {
@@ -84,6 +87,7 @@ export interface GsapFlipCardProps {
   captionFadeDuration?: number;
   captionRevealDuration?: number;
   captionLineStagger?: number;
+  defaultOpened?: boolean;
   onClose?: () => void;
   className?: string;
 }
@@ -136,11 +140,11 @@ export default function GsapFlipCard({
   textColor = "#111111",
   mutedColor = "#8a8a86",
   rounded = 20,
-  thumbWidth = 108,
-  thumbHeight = 120,
-  thumbGap = 12,
+  thumbWidth = 92,
+  thumbHeight = 96,
+  thumbGap = 8,
   heroWidth = 530,
-  heroHeight = 670,
+  heroHeight = 620,
   duration = 0.7,
   ease = "power3.inOut",
   stackOffsetX = 3,
@@ -151,21 +155,27 @@ export default function GsapFlipCard({
   captionFadeDuration = 0.25,
   captionRevealDuration = 0.55,
   captionLineStagger = 0.07,
+  defaultOpened = true,
   onClose,
   className = "",
 }: GsapFlipCardProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [order, setOrder] = useState<number[]>(() => items.map((_, i) => i));
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(defaultOpened);
   const [stageWidth, setStageWidth] = useState(0);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
   const flipStateRef = useRef<ReturnType<typeof Flip.getState> | null>(null);
   const isAnimatingRef = useRef(false);
-  const [shownCaption, setShownCaption] = useState<string | undefined>(
-    () => items[0]?.caption
+  const [shownTitle, setShownTitle] = useState<string | undefined>(
+    () => items[0]?.title ?? title
   );
+  const [shownDescription, setShownDescription] = useState<string | undefined>(
+    () => items[0]?.description ?? items[0]?.caption ?? description
+  );
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const titleTweenRef = useRef<gsap.core.Tween | null>(null);
   const captionRef = useRef<HTMLParagraphElement | null>(null);
   const captionTweenRef = useRef<gsap.core.Tween | null>(null);
   const captionSplitRef = useRef<SplitText | null>(null);
@@ -211,6 +221,8 @@ export default function GsapFlipCard({
   const hH = heroHeight * (hW / heroWidth || 1);
   const railX = Math.max(24, stageWidth * 0.045);
   const heroX = stageWidth - hW - railX;
+  const panelLeft = railX + tW + Math.max(32, stageWidth * 0.035);
+  const panelMaxWidth = Math.min(480, Math.max(280, heroX - panelLeft - 24));
   const stackWidth = Math.min(215 * scale, stageWidth * 0.42);
   const stackHeight = stackWidth * 1.5;
 
@@ -316,64 +328,113 @@ export default function GsapFlipCard({
     onClose?.();
   }, [opened, reducedMotion, orderedCards, duration, ease, onClose]);
 
-  const nextCaption = items[order[0]]?.caption;
-  const activeCaption = reducedMotion ? nextCaption : shownCaption;
+  const currentItem = items[order[0]];
+  const nextTitle = currentItem?.title ?? title;
+  const nextDescription = currentItem?.description ?? currentItem?.caption ?? description;
+
+  const activeTitle = reducedMotion ? nextTitle : shownTitle;
+  const activeDescription = reducedMotion ? nextDescription : shownDescription;
 
   useEffect(() => {
-    if (reducedMotion || nextCaption === shownCaption) return;
-    const el = captionRef.current;
-    if (!el) {
-      revertCaptionSplit();
-      setShownCaption(nextCaption);
+    if (reducedMotion) {
+      setShownTitle(nextTitle);
+      setShownDescription(nextDescription);
       return;
     }
+
+    const titleNeedsChange = nextTitle !== shownTitle;
+    const descNeedsChange = nextDescription !== shownDescription;
+    if (!titleNeedsChange && !descNeedsChange) return;
+
+    const titleEl = titleRef.current;
+    const capEl = captionRef.current;
+
+    titleTweenRef.current?.kill();
     captionTweenRef.current?.kill();
-    captionTweenRef.current = gsap.to(el, {
+
+    const targets: HTMLElement[] = [];
+    if (titleNeedsChange && titleEl) targets.push(titleEl);
+    if (descNeedsChange && capEl) targets.push(capEl);
+
+    if (!targets.length) {
+      revertCaptionSplit();
+      if (titleNeedsChange) setShownTitle(nextTitle);
+      if (descNeedsChange) setShownDescription(nextDescription);
+      return;
+    }
+
+    gsap.to(targets, {
       opacity: 0,
-      y: -8,
+      y: -6,
       duration: captionFadeDuration,
       ease: "power2.in",
       onComplete: () => {
         revertCaptionSplit();
-        setShownCaption(nextCaption);
+        if (titleNeedsChange) setShownTitle(nextTitle);
+        if (descNeedsChange) setShownDescription(nextDescription);
       },
     });
-  }, [nextCaption, shownCaption, reducedMotion, captionFadeDuration, revertCaptionSplit]);
+  }, [
+    nextTitle,
+    nextDescription,
+    shownTitle,
+    shownDescription,
+    reducedMotion,
+    captionFadeDuration,
+    revertCaptionSplit,
+  ]);
 
   useLayoutEffect(() => {
-    const el = captionRef.current;
-    if (!el || !activeCaption) return;
+    const titleEl = titleRef.current;
+    const capEl = captionRef.current;
+    if (!titleEl && !capEl) return;
+
     if (reducedMotion) {
       revertCaptionSplit();
-      gsap.set(el, { opacity: 1, y: 0 });
+      if (titleEl) gsap.set(titleEl, { opacity: 1, y: 0 });
+      if (capEl) gsap.set(capEl, { opacity: 1, y: 0 });
       return;
     }
-    captionTweenRef.current?.kill();
-    revertCaptionSplit();
-    gsap.set(el, { opacity: 1, y: 0 });
-    const split = SplitText.create(el, {
-      type: "lines",
-      linesClass: "hxs-caption-line",
-      mask: "lines",
-    });
-    captionSplitRef.current = split;
-    const lines = split.lines;
-    if (!lines?.length) {
+
+    if (titleEl && activeTitle) {
+      titleTweenRef.current?.kill();
+      gsap.fromTo(
+        titleEl,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: captionRevealDuration * 0.75, ease: "power3.out" }
+      );
+    }
+
+    if (capEl && activeDescription) {
+      captionTweenRef.current?.kill();
       revertCaptionSplit();
-      return;
+      gsap.set(capEl, { opacity: 1, y: 0 });
+      const split = SplitText.create(capEl, {
+        type: "lines",
+        linesClass: "hxs-caption-line",
+        mask: "lines",
+      });
+      captionSplitRef.current = split;
+      const lines = split.lines;
+      if (!lines?.length) {
+        revertCaptionSplit();
+        return;
+      }
+      gsap.set(lines, { yPercent: 100 });
+      captionTweenRef.current = gsap.to(lines, {
+        yPercent: 0,
+        duration: captionRevealDuration,
+        stagger: captionLineStagger,
+        ease: "power3.out",
+      });
     }
-    gsap.set(lines, { yPercent: 100 });
-    captionTweenRef.current = gsap.to(lines, {
-      yPercent: 0,
-      duration: captionRevealDuration,
-      stagger: captionLineStagger,
-      ease: "power3.out",
-    });
+
     return () => {
+      titleTweenRef.current?.kill();
       captionTweenRef.current?.kill();
       revertCaptionSplit();
     };
-  }, [activeCaption, reducedMotion, captionRevealDuration, captionLineStagger, revertCaptionSplit]);
+  }, [activeTitle, activeDescription, reducedMotion, captionRevealDuration, captionLineStagger, revertCaptionSplit]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -459,34 +520,28 @@ export default function GsapFlipCard({
                 src={heroItem.image}
                 alt={heroItem.alt ?? ""}
                 draggable={false}
+                style={heroItem.objectPosition ? { objectPosition: heroItem.objectPosition } : undefined}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           )}
 
           <div className="max-[1025px]:pb-[3vh]">
-            <h2 className="text-[7vw] max-md:text-[8.5vw] leading-[1.05] m-0 font-normal tracking-[-0.02em]">
-              {title}
+            <h2
+              ref={titleRef}
+              className="text-[7vw] max-md:text-[8.5vw] leading-[1.05] m-0 font-bold tracking-[-0.02em] text-[#18181B]"
+            >
+              {activeTitle}
             </h2>
-            <p className="text-[3vw] max-md:text-[3.5vw] mt-[3vw] mb-[4vw]" style={{ color: mutedColor }}>
+            <p className="text-[3vw] max-md:text-[3.5vw] mt-[2.5vw] mb-[3.5vw]" style={{ color: mutedColor }}>
               {meta}
             </p>
-            <p className="text-[3.2vw] max-md:text-[3.8vw] leading-[1.65] m-0">{description}</p>
-            <div
-              className="mt-[5vw] h-[calc(var(--hxs-cap-line)*var(--hxs-cap-lines))] max-md:[--hxs-cap-line:var(--hxs-cap-line-sm)]"
-              style={
-                {
-                  "--hxs-cap-line": CAPTION_MOBILE_LINE,
-                  "--hxs-cap-line-sm": CAPTION_MOBILE_LINE_SM,
-                  "--hxs-cap-lines": captionLines,
-                } as CSSProperties
-              }
-            >
+            <div className="min-h-[3.2rem]">
               <p
                 ref={captionRef}
-                className="text-[3vw] text-left max-md:text-left max-md:w-[80%] max-md:text-[4vw] w-[80%] m-0 leading-normal"
+                className="text-sm sm:text-base text-left w-full max-w-prose m-0 leading-relaxed text-[#52525B]"
               >
-                {activeCaption}
+                {activeDescription}
               </p>
             </div>
           </div>
@@ -508,6 +563,7 @@ export default function GsapFlipCard({
                     src={item.image}
                     alt={item.alt ?? ""}
                     draggable={false}
+                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </button>
@@ -522,7 +578,7 @@ export default function GsapFlipCard({
   return (
     <div
       ref={rootRef}
-      className={`hxs-gsap-flip-card relative w-full min-h-svh overflow-hidden ${className}`}
+      className={`hxs-gsap-flip-card relative w-full min-h-[max(780px,100svh)] lg:min-h-[max(840px,100svh)] overflow-hidden ${className}`}
       style={{ background: backgroundColor, color: textColor }}
     >
       {showCounter && (
@@ -540,22 +596,33 @@ export default function GsapFlipCard({
         onClick={(e) => {
           if (e.target === e.currentTarget) close();
         }}
-        className={`relative w-full min-h-svh ${opened ? "cursor-pointer" : "cursor-default"}`}
+        className={`relative w-full min-h-[max(780px,100svh)] lg:min-h-[max(840px,100svh)] ${opened ? "cursor-pointer" : "cursor-default"}`}
       >
         <div
-          className={`absolute top-1/2 -translate-y-1/2 max-w-[22.22vw] z-30 pointer-events-none ${
+          className={`absolute top-1/2 -translate-y-1/2 w-full z-30 pointer-events-none ${
             isNarrow ? "hidden" : "block"
           }`}
-          style={{ ...chromeStyle, left: railX + tW + Math.max(48, stageWidth * 0.06) }}
+          style={{
+            ...chromeStyle,
+            left: panelLeft,
+            maxWidth: panelMaxWidth,
+          }}
         >
-          <h2 className="text-[3.2vw] leading-[1.05] font-normal tracking-[-0.02em] m-0">{title}</h2>
-          <p className="text-[0.9vw] mt-[0.97vw] mb-[1.81vw] mx-0" style={{ color: mutedColor }}>
+          <h2
+            ref={titleRef}
+            className="text-[3.2vw] leading-[1.05] font-bold tracking-[-0.02em] m-0 text-[#18181B]"
+          >
+            {activeTitle}
+          </h2>
+          <p className="text-[0.9vw] mt-[0.97vw] mb-[1.4vw] mx-0" style={{ color: mutedColor }}>
             {meta}
           </p>
-          <p className="text-[0.97vw] leading-[1.65] m-0">{description}</p>
-          <div className="mt-[1.94vw]" style={{ height: `${CAPTION_LINE_VW * captionLines}vw` }}>
-            <p ref={captionRef} className="text-[1vw] w-[80%] text-left leading-[1.3] m-0">
-              {activeCaption}
+          <div className="mt-[0.5vw] min-h-[3.5rem]">
+            <p
+              ref={captionRef}
+              className="text-[15px] xl:text-[16px] w-full text-left leading-[1.65] m-0 text-[#52525B]"
+            >
+              {activeDescription}
             </p>
           </div>
         </div>
@@ -583,6 +650,7 @@ export default function GsapFlipCard({
                 src={item.image}
                 alt={item.alt ?? ""}
                 draggable={false}
+                style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                 className="absolute inset-0 h-full w-full object-cover rounded-[inherit]"
               />
             </button>

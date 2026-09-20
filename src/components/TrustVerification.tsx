@@ -1,31 +1,32 @@
 import Image from "next/image";
-import { ShieldCheck, FileCheck, Sparkles, Lock, UserCheck } from "lucide-react";
+import { ShieldCheck, UserCheck, Award, FileCheck2 } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function TrustVerification() {
   const trustFeatures = [
     {
-      title: "CNIC & Student ID Verified",
+      title: "100% CNIC & Background Verified",
       description:
-        "Every tutor undergoes 100% manual authentication of their Government CNIC and active university credentials.",
+        "Every tutor undergoes rigorous government identity verification via NADRA CNIC cross-checks before meeting students.",
       icon: ShieldCheck,
     },
     {
-      title: "Subject-Qualification Screening",
+      title: "Enrolled in Top Pakistani Universities",
       description:
-        "We only accept tutors who scored 90%+ in board exams and completed rigorous conceptual testing.",
-      icon: FileCheck,
+        "Our tutors are actively enrolled scholars at LUMS, NUST, AKU, FAST, and GIKI with verified transcripts.",
+      icon: UserCheck,
     },
     {
-      title: "100% Free Demo Guarantee",
+      title: "Board & Cambridge Top Scorers",
       description:
-        "Take a full 45-minute live demo class. If the fit isn't perfect, we rematch you immediately at zero cost.",
-      icon: Sparkles,
+        "Tutors must have achieved top marks (A+ / 90%+ in Board exams or straight A*/As in O & A Levels) for the subjects they teach.",
+      icon: Award,
     },
     {
-      title: "Safe & Monitored Sessions",
+      title: "Pedagogy & Chemistry Interview",
       description:
-        "Transparent session logs and regular parental check-ins ensure maximum discipline, safety, and progress.",
-      icon: Lock,
+        "Only 15% of applicants pass our multi-stage vetting, assessing subject mastery, patience, and communication skills.",
+      icon: FileCheck2,
     },
   ];
 
@@ -35,13 +36,19 @@ export default function TrustVerification() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            Uncompromising Safety &amp; Quality
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Uncompromising Safety &amp; Quality
+            </ScrollReveal>
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            Trust &amp; Verification You Can Rely On
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              Trust &amp; Verification You Can Rely On
+            </ScrollReveal>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            We know trust is paramount when selecting a tutor for your home or online lessons. Fewer than 15% of tutor applicants pass our vetting process.
+            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+              We know trust is paramount when selecting a tutor for your home or online lessons. Fewer than 15% of tutor applicants pass our vetting process.
+            </ScrollReveal>
           </p>
         </div>
 
@@ -86,10 +93,14 @@ export default function TrustVerification() {
                   <div>
                     <Icon className="w-5 h-5 text-[#18181B] mb-6" />
                     <h3 className="text-lg font-bold text-[#18181B]">
-                      {feature.title}
+                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                        {feature.title}
+                      </ScrollReveal>
                     </h3>
                     <p className="mt-2.5 text-sm text-[#52525B] leading-relaxed">
-                      {feature.description}
+                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
+                        {feature.description}
+                      </ScrollReveal>
                     </p>
                   </div>
                 </div>
