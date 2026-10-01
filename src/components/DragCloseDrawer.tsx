@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 import { backdropVariants, drawerVariants } from "@/lib/motion";
+import { CONTACT_INFO } from "@/lib/contact";
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 const navLinks = [
   { name: "Home", href: "#" },
@@ -115,6 +117,61 @@ export default function DragCloseDrawer() {
               >
                 Become a Tutor
               </Link>
+            </div>
+
+            {/* Mobile Contact & Social Media Section */}
+            <div className="pt-5 mt-4 border-t border-[#E8E1D5]/60 space-y-3">
+              <a
+                href={CONTACT_INFO.whatsAppChatLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeDrawer}
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20bd5a] rounded-full active:scale-95 transition-all shadow-xs"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>WhatsApp Us ({CONTACT_INFO.whatsAppNumber})</span>
+              </a>
+
+              <div className="flex items-center justify-between pt-1">
+                <a
+                  href={CONTACT_INFO.telLink}
+                  className="text-xs font-semibold text-[#52525B] hover:text-[#2E8B57] transition-colors"
+                >
+                  Call: {CONTACT_INFO.whatsAppNumber}
+                </a>
+
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CONTACT_INFO.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Apex Tutors on Facebook"
+                    className="w-9 h-9 rounded-full bg-[#EAE2D4] text-[#18181B] flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all active:scale-95"
+                  >
+                    <FacebookIcon className="w-4 h-4" />
+                  </a>
+
+                  <a
+                    href={CONTACT_INFO.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Apex Tutors on Instagram"
+                    className="w-9 h-9 rounded-full bg-[#EAE2D4] text-[#18181B] flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white transition-all active:scale-95"
+                  >
+                    <InstagramIcon className="w-4 h-4" />
+                  </a>
+
+                  <a
+                    href={CONTACT_INFO.whatsAppLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat with Apex Tutors on WhatsApp"
+                    className="w-9 h-9 rounded-full bg-[#EAE2D4] text-[#18181B] flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all active:scale-95"
+                  >
+                    <WhatsAppIcon className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

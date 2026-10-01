@@ -10,6 +10,7 @@ import {
 import { FaLinkedinIn as SiLinkedin } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import { useAnimate } from "motion/react";
+import { FACEBOOK_URL, INSTAGRAM_URL, WHATSAPP_LINK } from "@/lib/contact";
 
 const NO_CLIP = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
 const BOTTOM_RIGHT_CLIP = "polygon(0 0, 100% 0, 0 0, 0% 100%)";
@@ -97,13 +98,13 @@ export const ClipPathLinks: React.FC = () => {
   return (
     <div className="divide-y divide-[#18181B]/15 border border-[#18181B]/15 rounded-2xl overflow-hidden bg-[#FAF7F2]">
       <div className="grid grid-cols-2 divide-x divide-[#18181B]/15">
-        <LinkBox Icon={SiFacebook} href="#" label="Facebook" />
-        <LinkBox Icon={SiInstagram} href="#" label="Instagram" />
+        <LinkBox Icon={SiFacebook} href={FACEBOOK_URL} label="Facebook" />
+        <LinkBox Icon={SiInstagram} href={INSTAGRAM_URL} label="Instagram" />
       </div>
       <div className="grid grid-cols-3 divide-x divide-[#18181B]/15">
         <LinkBox Icon={SiLinkedin} href="#" label="LinkedIn" />
         <LinkBox Icon={SiTiktok} href="#" label="TikTok" />
-        <LinkBox Icon={SiWhatsapp} href="#" label="WhatsApp" />
+        <LinkBox Icon={SiWhatsapp} href={WHATSAPP_LINK} label="WhatsApp" />
       </div>
     </div>
   );

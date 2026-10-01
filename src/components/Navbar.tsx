@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
+import { CONTACT_INFO } from "@/lib/contact";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,7 +77,17 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop Action Buttons */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-5">
+            <a
+              href={CONTACT_INFO.whatsAppChatLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`WhatsApp Us at ${CONTACT_INFO.whatsAppNumber}`}
+              className="group inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-[#18181B] bg-emerald-500/10 hover:bg-[#25D366] hover:text-white border border-[#25D366]/30 hover:border-[#25D366] rounded-full transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+            >
+              <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] group-hover:text-white transition-colors" />
+              <span>WhatsApp Us</span>
+            </a>
             <Link
               href="/apply-tutor"
               className="text-sm font-medium text-[#52525B] hover:text-[#18181B] transition-colors"

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ClipPathLinks } from "@/components/ui/clip-path-links";
+import { CONTACT_INFO } from "@/lib/contact";
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -36,21 +38,72 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 flex flex-col gap-2 text-xs text-[#71717A]">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[#71717A]">WhatsApp / Call:</span>
+                <a
+                  href={CONTACT_INFO.telLink}
+                  className="font-semibold text-white hover:text-[#25D366] transition-colors"
+                >
+                  {CONTACT_INFO.whatsAppNumber}
+                </a>
+              </div>
               <a
-                href="https://wa.me/923000000000"
+                href={CONTACT_INFO.whatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="hover:text-[#25D366] transition-colors inline-flex items-center gap-1"
               >
-                WhatsApp: +92 300 0000000
+                <span>Chat on WhatsApp</span>
+                <span aria-hidden="true">&rarr;</span>
               </a>
               <a
-                href="mailto:support@apextutors.pk"
+                href={`mailto:${CONTACT_INFO.email}`}
                 className="hover:text-white transition-colors"
               >
-                admissions@apextutors.pk
+                {CONTACT_INFO.email}
               </a>
               <span>Serving DHA, Bahria Town &amp; Major Cities Nationwide</span>
+            </div>
+
+            {/* Connect With Us / Follow Us Section */}
+            <div className="pt-3 space-y-2.5">
+              <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
+                Connect With Us
+              </h3>
+              <div className="flex items-center gap-3">
+                {/* Facebook Button */}
+                <a
+                  href={CONTACT_INFO.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Apex Tutors on Facebook"
+                  className="w-10 h-10 rounded-full bg-[#2B2824] text-[#A1A1AA] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-[#1877F2] hover:text-white hover:shadow-[0_0_15px_rgba(24,119,242,0.5)] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2]"
+                >
+                  <FacebookIcon className="w-5 h-5" />
+                </a>
+
+                {/* Instagram Button */}
+                <a
+                  href={CONTACT_INFO.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Apex Tutors on Instagram"
+                  className="w-10 h-10 rounded-full bg-[#2B2824] text-[#A1A1AA] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white hover:shadow-[0_0_15px_rgba(221,42,123,0.5)] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DD2A7B]"
+                >
+                  <InstagramIcon className="w-5 h-5" />
+                </a>
+
+                {/* WhatsApp Button */}
+                <a
+                  href={CONTACT_INFO.whatsAppLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with Apex Tutors on WhatsApp"
+                  className="w-10 h-10 rounded-full bg-[#2B2824] text-[#A1A1AA] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-[#25D366] hover:text-white hover:shadow-[0_0_15px_rgba(37,211,102,0.5)] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
+                >
+                  <WhatsAppIcon className="w-5 h-5" />
+                </a>
+              </div>
             </div>
 
             <div className="w-full max-w-xs pt-2">

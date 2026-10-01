@@ -7,6 +7,7 @@ import DragCloseDrawer from "@/components/DragCloseDrawer";
 import CutoutTextLoader from "@/components/CutoutTextLoader";
 import { Home, BookOpen, MapPin, Phone } from "lucide-react";
 import { NavBar } from "@/components/ui/tubelight-navbar";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const mobileNavItems = [
   { name: "Home", url: "#", icon: Home },
@@ -23,6 +24,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <SpringModal />
       <DragCloseDrawer />
       <NavBar items={mobileNavItems} />
+      <FloatingWhatsApp />
     </ModalProvider>
   );
 }
