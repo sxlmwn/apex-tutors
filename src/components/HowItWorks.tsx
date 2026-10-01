@@ -1,36 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ClipboardList, UserCheck, Video, Award } from "lucide-react";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function HowItWorks() {
   const steps = [
     {
       number: "01",
       title: "Request a Tutor",
-      description:
-        "Select your level (Primary, Matric, FSc, O Level, or A Level), board/curriculum, and subjects needed.",
+      description: "Tell us your level, board, and subjects.",
       icon: ClipboardList,
     },
     {
       number: "02",
       title: "Get Matched",
-      description:
-        "We match you with a vetted university student who scored top marks in your exact exams.",
+      description: "Matched with a top scorer in your exact curriculum.",
       icon: UserCheck,
     },
     {
       number: "03",
       title: "Free Demo Class",
-      description:
-        "Join a 45-minute live demo session to assess teaching chemistry before committing.",
+      description: "Take a 45-minute free demo session before committing.",
       icon: Video,
     },
     {
       number: "04",
       title: "Start Learning",
-      description:
-        "Begin structured lessons with past-paper drills, concept shortcuts, and weekly feedback.",
+      description: "Start structured lessons with past-paper drills and feedback.",
       icon: Award,
     },
   ];
@@ -41,19 +36,13 @@ export default function HowItWorks() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Simple 4-Step Process
-            </ScrollReveal>
+            Simple 4-Step Process
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              How Apex Tutors Works
-            </ScrollReveal>
+            How Apex Tutors Works
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              From your initial request to your first free demo, we make finding an exceptional tutor for Primary, Matric, FSc, O &amp; A Level students effortless, safe, and transparent.
-            </ScrollReveal>
+            Find a verified tutor and start with a free demo class in under 24 hours.
           </p>
         </div>
 
@@ -75,15 +64,11 @@ export default function HowItWorks() {
                   </div>
 
                   <h3 className="mt-8 text-xl font-bold text-[#18181B]">
-                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                      {step.title}
-                    </ScrollReveal>
+                    {step.title}
                   </h3>
 
                   <p className="mt-2.5 text-sm text-[#52525B] leading-relaxed">
-                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                      {step.description}
-                    </ScrollReveal>
+                    {step.description}
                   </p>
                 </div>
               </div>
@@ -96,10 +81,10 @@ export default function HowItWorks() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Supporting Visual Image */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden aspect-4/3 max-h-[320px]">
+              <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[460px]">
                 <Image
-                  src="/images/how-it-works.jpg"
-                  alt="How Apex Tutors Works"
+                  src="/images/study-smart/hard-not-smart.jpg"
+                  alt="Study Smart — 5 Signs You're Studying Hard Not Smart"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover"
@@ -110,19 +95,13 @@ export default function HowItWorks() {
             {/* Content & Details */}
             <div className="lg:col-span-7 space-y-5">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  Zero Upfront Commitment
-                </ScrollReveal>
+                Zero Upfront Commitment
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  Experience Personalized Learning from Day One
-                </ScrollReveal>
+                Experience Personalized Learning from Day One
               </h3>
               <p className="text-base text-[#52525B] leading-relaxed">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  We believe every student deserves a mentor who understands their exact syllabus pressure. That&apos;s why your first 45-minute lesson is completely free — evaluate your tutor before confirming regular classes.
-                </ScrollReveal>
+                We believe every student deserves a mentor who understands their exact syllabus pressure. That&apos;s why your first 45-minute lesson is completely free — evaluate your tutor before confirming regular classes.
               </p>
 
               <div className="pt-2">

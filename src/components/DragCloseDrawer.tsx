@@ -2,8 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 import { backdropVariants, drawerVariants } from "@/lib/motion";
 
@@ -56,8 +57,14 @@ export default function DragCloseDrawer() {
             {/* Drawer Header with Brand + Close X */}
             <div className="flex items-center justify-between py-2 mb-4 border-b border-[#E8E1D5]/60">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#2E8B57] text-white flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4" />
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <Image
+                    src="/images/brand/logo-mark-v2.png"
+                    alt="Apex Tutors"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <span className="text-base font-bold tracking-tight text-[#18181B]">
                   Apex<span className="text-[#2E8B57]">Tutors</span>

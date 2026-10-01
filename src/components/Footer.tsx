@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { GraduationCap } from "lucide-react";
+import Image from "next/image";
 import { ClipPathLinks } from "@/components/ui/clip-path-links";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,8 +12,14 @@ export default function Footer() {
           {/* Col 1: Brand & Bio */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#2E8B57] text-white flex items-center justify-center">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Image
+                  src="/images/brand/logo-mark-v2.png"
+                  alt="Apex Tutors"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold tracking-tight text-white leading-none">
@@ -27,9 +32,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-[#71717A] leading-relaxed max-w-sm">
-              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                Connecting Primary, Matric, FSc, O Level, and A Level students across Pakistan with verified university scholars from LUMS, NUST, AKU, FAST, and GIKI.
-              </ScrollReveal>
+              Connecting Primary, Matric, FSc, O Level, and A Level students across Pakistan with verified university scholars from LUMS, NUST, AKU, FAST, and GIKI.
             </p>
 
             <div className="pt-2 flex flex-col gap-2 text-xs text-[#71717A]">
@@ -58,9 +61,7 @@ export default function Footer() {
           {/* Col 2: Navigation Links */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                Navigation
-              </ScrollReveal>
+              Navigation
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -99,9 +100,7 @@ export default function Footer() {
           {/* Col 3: Academic Tracks */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                Academic Tracks
-              </ScrollReveal>
+              Academic Tracks
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -140,9 +139,7 @@ export default function Footer() {
           {/* Col 4: Priority Cities */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-white uppercase tracking-widest">
-              <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                Cities
-              </ScrollReveal>
+              Cities
             </h3>
             <ul className="space-y-2 text-xs">
               <li>

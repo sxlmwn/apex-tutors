@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { springConfig, smoothDragSpring, snappySpring } from "@/lib/motion";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface LinkItemProps {
   number: string;
@@ -170,19 +169,13 @@ export default function HoverImageLinks() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Interactive Directory
-            </ScrollReveal>
+            Interactive Directory
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Explore Apex Tutors
-            </ScrollReveal>
+            Explore Apex Tutors
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Hover over any link to preview Pakistan&apos;s premier tutoring network for Primary, Matric, FSc, O &amp; A Level students.
-            </ScrollReveal>
+            Explore Pakistan&apos;s premier student-to-student tutoring network.
           </p>
         </div>
 

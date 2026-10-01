@@ -1,5 +1,3 @@
-import ScrollReveal from "@/components/ui/ScrollReveal";
-
 export default function TestimonialsStats() {
   const stats = [
     { value: "500+", label: "Students Mentored" },
@@ -10,32 +8,32 @@ export default function TestimonialsStats() {
   const testimonials = [
     {
       name: "Dr. Tariq Mahmood",
-      role: "Parent of 2nd Year FSc Student",
-      location: "DHA Phase 5, Lahore",
+      role: "FSc Parent",
+      location: "DHA Lahore",
       board: "BISE Lahore",
       content:
         "Finding an authentic physics mentor for FSc was challenging until Apex connected us with a LUMS engineering scholar. His focus on conceptual derivations and board paper presentation boosted my son’s score from 72% to 91%.",
     },
     {
       name: "Ayesha Imran",
-      role: "FSc Pre-Medical Student",
-      location: "Bahria Town Phase 7, Rawalpindi",
+      role: "FSc Student",
+      location: "Bahria Rawalpindi",
       board: "FBISE Federal",
       content:
         "Organic chemistry reaction mechanisms and biology diagrams used to terrify me. My tutor from Army Medical College made everything click with past-paper shortcuts. I secured 1024/1100 in FBISE Part-1!",
     },
     {
       name: "Mrs. Farzana Siddiqui",
-      role: "Parent of 10th Grade Student",
-      location: "Sector F-8/2, Islamabad",
+      role: "Matric Parent",
+      location: "F-8 Islamabad",
       board: "FBISE Matric",
       content:
         "The free demo class gave us total peace of mind. Our NUST tutor is remarkably disciplined, polite, and provides a weekly progress report after every mock test. Outstanding service for Islamabad parents.",
     },
     {
       name: "Hamza Naveed",
-      role: "O Level / IGCSE Candidate",
-      location: "DHA Phase 6, Karachi",
+      role: "O Level Student",
+      location: "DHA Karachi",
       board: "Cambridge (CAIE)",
       content:
         "My mathematics and physics past papers used to hold me back. My mentor from FAST walked me through step-by-step problem sets and variant past papers on an interactive digital whiteboard. The 1-on-1 pacing made all the difference for my A*.",
@@ -48,19 +46,13 @@ export default function TestimonialsStats() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Real Stories, Real Results
-            </ScrollReveal>
+            Real Stories, Real Results
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Trusted by Families Across Pakistan
-            </ScrollReveal>
+            Trusted by Families Across Pakistan
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              See how our university-student mentors are helping Primary, Matric, FSc, O Level, and A Level students conquer tough syllabi and achieve academic distinctions.
-            </ScrollReveal>
+            Real results from students and parents mentored by our verified scholars.
           </p>
         </div>
 
@@ -90,9 +82,7 @@ export default function TestimonialsStats() {
               <div>
                 <p className="text-sm sm:text-base text-[#18181B] leading-relaxed">
                   &ldquo;
-                  <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                    {t.content}
-                  </ScrollReveal>
+                  {t.content}
                   &rdquo;
                 </p>
               </div>
@@ -100,9 +90,7 @@ export default function TestimonialsStats() {
               <div className="mt-8 pt-4 border-t border-[#E8E1D5]/60 flex items-end justify-between">
                 <div>
                   <h4 className="text-sm font-bold text-[#18181B]">
-                    <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                      {t.name}
-                    </ScrollReveal>
+                    {t.name}
                   </h4>
                   <p className="text-xs text-[#71717A] mt-0.5">
                     {t.role} • {t.location}

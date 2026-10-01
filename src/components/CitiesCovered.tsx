@@ -1,7 +1,6 @@
 "use client";
 
 import GsapFlipCard from "@/components/ui/gsap-card-flip";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function CitiesCovered() {
   return (
@@ -10,19 +9,13 @@ export default function CitiesCovered() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Pakistan Nationwide Presence
-            </ScrollReveal>
+            Pakistan Nationwide Presence
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Cities &amp; Communities We Serve
-            </ScrollReveal>
+            Cities &amp; Communities We Serve
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Currently serving families across seven major cities, expanding city by city with verified in-home mentors and nationwide 1-on-1 interactive digital classrooms.
-            </ScrollReveal>
+            Serving families across seven major cities with verified in-home and online mentors.
           </p>
         </div>
 

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useModal } from "@/context/ModalContext";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function CtaBanner() {
   const { openModal } = useModal();
@@ -16,21 +15,15 @@ export default function CtaBanner() {
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#A1A1AA]">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  Zero-Risk Guarantee • 100% Free Demo
-                </ScrollReveal>
+                Zero-Risk Guarantee • 100% Free Demo
               </span>
 
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  Ready to Find Your Tutor?
-                </ScrollReveal>
+                Ready to Find Your Tutor?
               </h2>
 
               <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-                <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                  Whether preparing for Primary school, Matric, FSc, O Level, or A Level, tell us your learning goals and we will match you with a verified university mentor in under 24 hours.
-                </ScrollReveal>
+                Whether preparing for Primary school, Matric, FSc, O Level, or A Level, tell us your learning goals and we will match you with a verified university mentor in under 24 hours.
               </p>
 
               {/* Two Standardized Buttons */}
@@ -57,15 +50,15 @@ export default function CtaBanner() {
 
             {/* Right Side Visual */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-sm h-[320px] sm:h-[360px] rounded-2xl overflow-hidden">
+              <div className="relative w-full max-w-sm aspect-[1092/1269] rounded-3xl overflow-hidden bg-[#F3EDE2] shadow-2xl">
                 <Image
-                  src="/images/cta-final.jpg"
-                  alt="Ready to learn with Apex Tutors"
+                  src="/images/study-smart/apextutors-solves-them-all.jpg"
+                  alt="ApexTutors Solves Them All — 1-on-1 Mentorship from Pakistan's Top Universities"
                   fill
                   priority
                   unoptimized
                   sizes="(max-width: 768px) 100vw, 35vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </div>

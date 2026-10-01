@@ -1,0 +1,255 @@
+.morph-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background: transparent;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+/* Rounded clipping frame for the WebGL image and internal overlays */
+.morph-slider-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden !important;
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  background: #0c0c0e;
+  box-shadow: 0 20px 40px -15px rgba(24, 24, 27, 0.12), 0 0 0 1px rgba(232, 225, 213, 0.6);
+}
+
+.morph-slider-stage {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  outline: none;
+  border-radius: inherit;
+  overflow: hidden !important;
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+}
+
+.morph-slider-stage:active {
+  cursor: grabbing;
+}
+
+.morph-slider-stage:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+.morph-slider-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* Rich bottom gradient scrim directly behind caption text */
+.morph-slider-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: inherit;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.55) 28%,
+    rgba(0, 0, 0, 0.18) 55%,
+    transparent 78%
+  );
+}
+
+/* High-impact Hero-style typography caption overlay */
+.morph-slider-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 3;
+  max-width: 80%;
+  pointer-events: none;
+  display: grid;
+}
+
+@media (min-width: 640px) {
+  .morph-slider-caption {
+    left: 40px;
+    bottom: 36px;
+    max-width: 75%;
+  }
+}
+
+.morph-slider-caption-group {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);
+  transition:
+    opacity var(--ms-swap) cubic-bezier(0.16, 1, 0.3, 1),
+    transform var(--ms-swap) cubic-bezier(0.16, 1, 0.3, 1),
+    filter var(--ms-swap) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.morph-slider-caption-group.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.morph-slider-caption-text {
+  display: inline-block;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.75), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.morph-slider-caption-description {
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(0.875rem, 1.4vw, 1.05rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 480px;
+  line-height: 1.4;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Arrow controls positioned outside the image frame in the margins */
+.morph-slider-controls {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  right: -20px;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .morph-slider-controls {
+    left: -32px;
+    right: -32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .morph-slider-controls {
+    left: -60px;
+    right: -60px;
+  }
+}
+
+/* Elevated circular buttons matching the page's cream/white background */
+.morph-slider-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #E8E1D5;
+  border-radius: 50%;
+  color: #18181B;
+  background: #FAF7F2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.morph-slider-btn:hover {
+  background: #FFFFFF;
+  border-color: #2E8B57;
+  color: #2E8B57;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(46, 139, 87, 0.18);
+}
+
+.morph-slider-btn:active {
+  transform: scale(0.95);
+}
+
+.morph-slider-btn:focus-visible {
+  outline: 2px solid #2E8B57;
+  outline-offset: 2px;
+}
+
+/* Indicators positioned bottom-right */
+.morph-slider-indicators {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .morph-slider-indicators {
+    right: 40px;
+    bottom: 36px;
+  }
+}
+
+.morph-slider-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition:
+    width var(--ms-dot) cubic-bezier(0.16, 1, 0.3, 1),
+    background var(--ms-dot) ease;
+}
+
+.morph-slider-dot.is-active {
+  width: 24px;
+  background: #FFFFFF;
+}
+
+.morph-slider-dot:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .morph-slider-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morph-slider-caption-group,
+  .morph-slider-caption-text,
+  .morph-slider-btn,
+  .morph-slider-dot {
+    animation: none;
+    transition: none;
+  }
+}

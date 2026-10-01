@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { GraduationCap, Menu, X } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 
 export default function Navbar() {
@@ -40,8 +41,15 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E8B57] rounded-lg"
           >
-            <div className="w-9 h-9 rounded-xl bg-[#2E8B57] text-white flex items-center justify-center transition-transform group-hover:scale-105">
-              <GraduationCap className="w-5 h-5" />
+            <div className="w-9 h-9 flex items-center justify-center transition-transform group-hover:scale-105">
+              <Image
+                src="/images/brand/logo-mark-v2.png"
+                alt="Apex Tutors"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-[#18181B] leading-none">

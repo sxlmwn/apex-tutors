@@ -1,31 +1,26 @@
 import Image from "next/image";
 import { ShieldCheck, UserCheck, Award, FileCheck2 } from "lucide-react";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function TrustVerification() {
   const trustFeatures = [
     {
       title: "100% CNIC & Background Verified",
-      description:
-        "Every tutor undergoes rigorous government identity verification via NADRA CNIC cross-checks before meeting students.",
+      description: "Verified via NADRA CNIC before meeting students.",
       icon: ShieldCheck,
     },
     {
       title: "Enrolled in Top Pakistani Universities",
-      description:
-        "Our tutors are actively enrolled scholars at LUMS, NUST, AKU, FAST, and GIKI with verified transcripts.",
+      description: "Scholars from LUMS, NUST, AKU, FAST, and GIKI with verified transcripts.",
       icon: UserCheck,
     },
     {
       title: "Board & Cambridge Top Scorers",
-      description:
-        "Tutors must have achieved top marks (A+ / 90%+ in Board exams or straight A*/As in O & A Levels) for the subjects they teach.",
+      description: "Top scorers with A+ / 90%+ in boards or straight A*/As in O/A Levels.",
       icon: Award,
     },
     {
       title: "Pedagogy & Chemistry Interview",
-      description:
-        "Only 15% of applicants pass our multi-stage vetting, assessing subject mastery, patience, and communication skills.",
+      description: "Multi-stage vetting assessing subject mastery, patience, and clarity.",
       icon: FileCheck2,
     },
   ];
@@ -36,19 +31,13 @@ export default function TrustVerification() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Uncompromising Safety &amp; Quality
-            </ScrollReveal>
+            Uncompromising Safety &amp; Quality
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              Trust &amp; Verification You Can Rely On
-            </ScrollReveal>
+            Trust &amp; Verification You Can Rely On
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
-            <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-              We know trust is paramount when selecting a tutor for your home or online lessons. Fewer than 15% of tutor applicants pass our vetting process.
-            </ScrollReveal>
+            Fewer than 15% of tutor applicants pass our rigorous vetting process.
           </p>
         </div>
 
@@ -93,14 +82,10 @@ export default function TrustVerification() {
                   <div>
                     <Icon className="w-5 h-5 text-[#18181B] mb-6" />
                     <h3 className="text-lg font-bold text-[#18181B]">
-                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                        {feature.title}
-                      </ScrollReveal>
+                      {feature.title}
                     </h3>
                     <p className="mt-2.5 text-sm text-[#52525B] leading-relaxed">
-                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={0} blurStrength={7}>
-                        {feature.description}
-                      </ScrollReveal>
+                      {feature.description}
                     </p>
                   </div>
                 </div>

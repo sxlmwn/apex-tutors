@@ -36,6 +36,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PK",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/brand/logo-mark-v2.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 

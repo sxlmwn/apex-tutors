@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { GraduationCap, ArrowLeft, CheckCircle2, ShieldCheck, Sparkles, DollarSign, Clock, BookCheck } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Sparkles, DollarSign, Clock, BookCheck } from "lucide-react";
 
 export default function ApplyTutorPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -53,8 +54,15 @@ export default function ApplyTutorPage() {
       <header className="bg-[#FAF7F2] border-b border-[#E8E1D5] py-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#2E8B57] text-white flex items-center justify-center">
-              <GraduationCap className="w-5 h-5" />
+            <div className="w-9 h-9 flex items-center justify-center">
+              <Image
+                src="/images/brand/logo-mark-v2.png"
+                alt="Apex Tutors"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
               Apex<span className="text-[#2E8B57]">Tutors</span>
