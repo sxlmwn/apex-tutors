@@ -24,24 +24,24 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section id="why-choose-us" className="py-24 lg:py-32 bg-[#F5F0E8] border-t border-[#E8E1D5]/60">
+    <section id="why-choose-us" className="py-10 sm:py-16 lg:py-32 bg-[#F5F0E8] border-t border-[#E8E1D5]/60">
       <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-16 lg:mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
             The Apex Advantage
           </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
+          <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] tracking-tight">
             Why Parents &amp; Students Choose Apex
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#52525B] leading-relaxed">
+          <p className="mt-2 sm:mt-4 text-sm sm:text-lg text-[#52525B] leading-relaxed">
             Dedicated 1-on-1 peer mentorship without expensive academy fees or unvetted tutors.
           </p>
         </div>
 
         {/* Split Showcase with why-choose-us.jpg */}
-        <div className="mb-16 bg-[#FAF7F2] rounded-3xl p-8 sm:p-12 border border-[#E8E1D5]/40">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="mb-8 sm:mb-16 bg-[#FAF7F2] rounded-2xl sm:rounded-3xl p-5 sm:p-12 border border-[#E8E1D5]/40">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             {/* Left Column: Image why-choose-us.jpg */}
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[460px]">
@@ -60,14 +60,14 @@ export default function WhyChooseUs() {
               <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
                 Peer-to-Peer Mentorship Model
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight leading-snug">
+              <h3 className="text-xl sm:text-3xl font-bold text-[#18181B] tracking-tight leading-snug">
                 Confident, Focused Learning Tailored to Every Student
               </h3>
               <p className="text-sm sm:text-base text-[#52525B] leading-relaxed">
                 Get 100% dedicated 1-on-1 attention from top university scholars instead of crowded academy lecture halls.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 text-sm text-[#18181B]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2 text-xs sm:text-sm text-[#18181B]">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2E8B57]" />
                   <span>No Upfront Registration Fee</span>
@@ -90,22 +90,25 @@ export default function WhyChooseUs() {
         </div>
 
         {/* 3 Column Benefits Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-6">
           {benefits.map((benefit) => {
             const Icon = benefit.icon;
             return (
               <div
                 key={benefit.title}
-                className="bg-[#FAF7F2] rounded-2xl p-8 sm:p-10 border border-[#E8E1D5]/40 flex flex-col justify-between"
+                className="bg-[#FAF7F2] rounded-2xl p-4 sm:p-10 border border-[#E8E1D5]/40 flex flex-row lg:flex-col items-start gap-3.5 lg:gap-0 justify-start lg:justify-between"
               >
-                <div>
+                {/* Left slot on mobile (40px badge). Desktop: transparent icon */}
+                <div className="shrink-0 w-10 h-10 rounded-full bg-[#EAE2D4]/70 flex items-center justify-center lg:w-auto lg:h-auto lg:rounded-none lg:bg-transparent lg:mb-8">
                   <Icon className="w-5 h-5 text-[#18181B]" />
+                </div>
 
-                  <h3 className="mt-8 text-xl font-bold text-[#18181B]">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-base lg:text-xl font-semibold lg:font-bold text-[#18181B] leading-tight">
                     {benefit.title}
                   </h3>
 
-                  <p className="mt-3 text-sm text-[#52525B] leading-relaxed">
+                  <p className="mt-1 lg:mt-3 text-xs sm:text-sm text-[#52525B] leading-[1.4] lg:leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
