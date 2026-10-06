@@ -1,21 +1,26 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { WHATSAPP_CHAT_LINK } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
+import { springConfig } from "@/lib/motion";
 
 export default function FloatingWhatsApp() {
   return (
-    <aside aria-label="WhatsApp Contact" className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40">
-      <a
+    <aside aria-label="WhatsApp Contact" className="fixed bottom-6 right-4 sm:bottom-6 sm:right-6 z-40">
+      <motion.a
         href={WHATSAPP_CHAT_LINK}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="relative group w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
+        transition={springConfig}
+        className="relative group w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#FAF7F2]/80 hover:bg-[#2E8B57] active:bg-[#236d44] border border-[#18181B]/10 hover:border-[#2E8B57] ring-1 ring-[#2E8B57]/20 hover:ring-[#2E8B57]/30 backdrop-blur-lg text-[#2E8B57] hover:text-[#FAF7F2] active:text-[#FAF7F2] flex items-center justify-center shadow-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E8B57] focus-visible:ring-offset-2"
       >
         {/* Clean WhatsApp Icon */}
-        <WhatsAppIcon className="w-6 h-6 sm:w-6.5 sm:h-6.5" />
+        <WhatsAppIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5 transition-colors duration-200" />
 
         {/* Desktop Tooltip */}
         <span
@@ -28,7 +33,8 @@ export default function FloatingWhatsApp() {
             aria-hidden="true"
           />
         </span>
-      </a>
+      </motion.a>
     </aside>
   );
 }
+
