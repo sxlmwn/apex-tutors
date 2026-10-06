@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { LucideIcon } from "lucide-react";
@@ -19,6 +19,43 @@ interface NavBarProps {
 
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0]?.name ?? "");
+
+  useEffect(() => {
+    if (!items.length) return;
+
+    const handleScroll = () => {
+      const line = window.innerHeight * 0.4;
+      let current = items[0].name;
+
+      for (const item of items) {
+        if (item.url.length > 1) {
+          const el = document.getElementById(item.url.slice(1));
+          if (el && el.getBoundingClientRect().top <= line) {
+            current = item.name;
+          }
+        }
+      }
+
+      if (
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 4
+      ) {
+        current = items[items.length - 1].name;
+      }
+
+      setActiveTab(current);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [items]);
 
   return (
     <div
