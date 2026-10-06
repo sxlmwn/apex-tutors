@@ -7,6 +7,9 @@ import { ArrowLeft, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
 
 export default function SignUpPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [hp, setHp] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -14,13 +17,55 @@ export default function SignUpPage() {
     area: "",
     grade: "FSc Pre-Medical",
     board: "Federal Board (FBISE)",
-    mode: "Online (1-on-1)",
+    mode: "Online (1-on-1 Interactive)",
     notes: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/student-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          city: formData.city,
+          area: formData.area,
+          grade: formData.grade,
+          board: formData.board,
+          mode: formData.mode,
+          notes: formData.notes,
+          source: "signup",
+          hp,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        let message =
+          data?.error || "Failed to schedule demo class. Please try again.";
+        if (data?.details && typeof data.details === "object") {
+          const detailMsgs = Object.values(data.details).flat().join(" ");
+          if (detailMsgs) message = detailMsgs;
+        }
+        throw new Error(message);
+      }
+
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred. Please try again.";
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -249,12 +294,32 @@ export default function SignUpPage() {
                 />
               </div>
 
+              {/* Honeypot Spam Trap (visually hidden) */}
+              <input
+                type="text"
+                name="_hp"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="opacity-0 absolute -z-10 w-0 h-0 pointer-events-none"
+              />
+
+              {/* Error Notification */}
+              {errorMessage && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700 leading-relaxed">
+                  {errorMessage}
+                </div>
+              )}
+
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-full bg-[#2E8B57] hover:bg-[#246e45] text-white font-bold text-base shadow-lg shadow-emerald-700/20 hover:shadow-xl transition-all cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-4 rounded-full bg-[#2E8B57] hover:bg-[#246e45] text-white font-bold text-base shadow-lg shadow-emerald-700/20 hover:shadow-xl transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Schedule My Free 45-Minute Demo Class
+                {isSubmitting ? "Submitting..." : "Schedule My Free 45-Minute Demo Class"}
               </button>
 
               <div className="flex items-center justify-center gap-2 text-xs text-slate-500">

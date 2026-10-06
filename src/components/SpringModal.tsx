@@ -17,14 +17,56 @@ export default function SpringModal() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [hp, setHp] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/student-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          grade: formData.classLevel,
+          city: formData.city,
+          source: "modal",
+          hp,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        let message = data?.error || "Failed to submit request. Please try again.";
+        if (data?.details && typeof data.details === "object") {
+          const detailMsgs = Object.values(data.details).flat().join(" ");
+          if (detailMsgs) message = detailMsgs;
+        }
+        throw new Error(message);
+      }
+
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred. Please try again.";
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setErrorMessage(null);
+    setHp("");
     setFormData({
       name: "",
       phone: "",
@@ -183,13 +225,33 @@ export default function SpringModal() {
                     </div>
                   </div>
 
+                  {/* Honeypot Spam Trap (visually hidden) */}
+                  <input
+                    type="text"
+                    name="_hp"
+                    value={hp}
+                    onChange={(e) => setHp(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="opacity-0 absolute -z-10 w-0 h-0 pointer-events-none"
+                  />
+
+                  {/* Error Notification */}
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs font-medium text-red-700 leading-relaxed">
+                      {errorMessage}
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#2E8B57] hover:bg-[#236d44] text-white font-medium text-sm transition-all active:scale-95 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="w-full inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#2E8B57] hover:bg-[#236d44] text-white font-medium text-sm transition-all active:scale-95 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      Request a Tutor
+                      {isSubmitting ? "Submitting..." : "Request a Tutor"}
                     </button>
                   </div>
 
