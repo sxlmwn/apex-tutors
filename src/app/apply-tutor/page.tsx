@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CheckCircle2, ShieldCheck, Sparkles, DollarSign, Clock, BookCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
+import { buildTutorWhatsAppLink } from "@/lib/whatsapp-link";
 
 export default function ApplyTutorPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,6 +22,7 @@ export default function ApplyTutorPage() {
     mode: "Both Online & Physical",
     subjects: [] as string[],
   });
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
 
   const availableSubjects = [
     "O / A Level (Cambridge Sciences & Math)",
@@ -86,6 +89,7 @@ export default function ApplyTutorPage() {
         throw new Error(message);
       }
 
+      setSubmittedData({ ...formData });
       setSubmitted(true);
     } catch (err: unknown) {
       const message =
@@ -139,7 +143,7 @@ export default function ApplyTutorPage() {
               Application Submitted Successfully!
             </h1>
             <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
-              Thank you for applying, <span className="font-bold text-slate-800">{formData.name}</span>. Our tutor onboarding team will review your academic credentials and contact you via WhatsApp at <span className="font-bold text-slate-800">{formData.phone}</span> for the initial screening interview and document verification.
+              Thank you for applying, <span className="font-bold text-slate-800">{submittedData?.name || formData.name}</span>. Our tutor onboarding team will review your academic credentials and contact you via WhatsApp at <span className="font-bold text-slate-800">{submittedData?.phone || formData.phone}</span> for the initial screening interview and document verification.
             </p>
 
             <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 text-xs text-emerald-800 flex items-center justify-center gap-2">
@@ -147,7 +151,24 @@ export default function ApplyTutorPage() {
               <span>Please keep your CNIC copy and Student Card / Transcript handy for verification.</span>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col items-center gap-3">
+              {submittedData && (
+                <div className="flex flex-col items-center gap-1.5 w-full">
+                  <a
+                    href={buildTutorWhatsAppLink(submittedData)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                    <span>Send this on WhatsApp too</span>
+                  </a>
+                  <p className="text-xs text-slate-500">
+                    Optional: this speeds up our reply.
+                  </p>
+                </div>
+              )}
+
               <Link
                 href="/"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#2E8B57] hover:bg-[#246e45] text-white font-bold text-sm shadow-md transition-all"

@@ -4,6 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
+import { buildStudentWhatsAppLink } from "@/lib/whatsapp-link";
+import {
+  CITY_OPTIONS,
+  GRADE_OPTIONS,
+  BOARD_OPTIONS,
+  STUDENT_MODE_OPTIONS,
+} from "@/lib/form-options";
 
 export default function SignUpPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,6 +28,7 @@ export default function SignUpPage() {
     mode: "Online (1-on-1 Interactive)",
     notes: "",
   });
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,6 +65,7 @@ export default function SignUpPage() {
         throw new Error(message);
       }
 
+      setSubmittedData({ ...formData });
       setSubmitted(true);
     } catch (err: unknown) {
       const message =
@@ -109,7 +119,7 @@ export default function SignUpPage() {
               Free Demo Request Received!
             </h1>
             <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
-              Thank you, <span className="font-bold text-slate-800">{formData.name}</span>. An Apex academic advisor will call or WhatsApp you at <span className="font-bold text-slate-800">{formData.phone}</span> within 2 hours to confirm your tutor match and demo time.
+              Thank you, <span className="font-bold text-slate-800">{submittedData?.name || formData.name}</span>. An Apex academic advisor will call or WhatsApp you at <span className="font-bold text-slate-800">{submittedData?.phone || formData.phone}</span> within 2 hours to confirm your tutor match and demo time.
             </p>
 
             <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 text-xs text-emerald-800 flex items-center justify-center gap-2">
@@ -117,7 +127,24 @@ export default function SignUpPage() {
               <span>Remember: Your 45-minute demo class is 100% free with zero upfront payment.</span>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col items-center gap-3">
+              {submittedData && (
+                <div className="flex flex-col items-center gap-1.5 w-full">
+                  <a
+                    href={buildStudentWhatsAppLink(submittedData)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                    <span>Send this on WhatsApp too</span>
+                  </a>
+                  <p className="text-xs text-slate-500">
+                    Optional: this speeds up our reply.
+                  </p>
+                </div>
+              )}
+
               <Link
                 href="/"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#2E8B57] hover:bg-[#246e45] text-white font-bold text-sm shadow-md transition-all"
@@ -182,14 +209,11 @@ export default function SignUpPage() {
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm bg-white"
                   >
-                    <option value="Lahore">Lahore</option>
-                    <option value="Karachi">Karachi</option>
-                    <option value="Islamabad">Islamabad</option>
-                    <option value="Rawalpindi">Rawalpindi</option>
-                    <option value="Multan">Multan</option>
-                    <option value="Faisalabad">Faisalabad</option>
-                    <option value="Bahawalpur">Bahawalpur</option>
-                    <option value="Other">Other City (Online)</option>
+                    {CITY_OPTIONS.map((c) => (
+                      <option key={c.value} value={c.value}>
+                        {c.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -217,15 +241,11 @@ export default function SignUpPage() {
                     onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm bg-white"
                   >
-                    <option value="Primary">Primary &amp; Middle (Grades 1-8)</option>
-                    <option value="O Level">O Level / IGCSE (Cambridge / Edexcel)</option>
-                    <option value="A Level">A Level (AS &amp; A2)</option>
-                    <option value="FSc Pre-Medical">FSc Pre-Medical (Part 1/2)</option>
-                    <option value="FSc Pre-Engineering">FSc Pre-Engineering (Part 1/2)</option>
-                    <option value="ICS">ICS Computer Science</option>
-                    <option value="Matric Science 10th">Matric Science (10th)</option>
-                    <option value="Matric Science 9th">Matric Science (9th)</option>
-                    <option value="Matric Arts/General">Matric Arts / General</option>
+                    {GRADE_OPTIONS.map((g) => (
+                      <option key={g.value} value={g.value}>
+                        {g.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -237,16 +257,11 @@ export default function SignUpPage() {
                     onChange={(e) => setFormData({ ...formData, board: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] text-sm bg-white"
                   >
-                    <option value="Cambridge (CAIE / Edexcel)">Cambridge (CAIE / Edexcel)</option>
-                    <option value="Primary School Curriculum">Primary School Curriculum</option>
-                    <option value="Federal Board (FBISE)">Federal Board (FBISE)</option>
-                    <option value="Punjab Board (BISE Lahore)">Punjab Board (BISE Lahore)</option>
-                    <option value="BISE Rawalpindi">BISE Rawalpindi</option>
-                    <option value="BISE Multan">BISE Multan</option>
-                    <option value="BISE Faisalabad">BISE Faisalabad</option>
-                    <option value="BISE Bahawalpur">BISE Bahawalpur</option>
-                    <option value="Sindh Board (BSEK/BIEK)">Sindh Board (BSEK / BIEK)</option>
-                    <option value="AKU-EB">Aga Khan Board (AKU-EB)</option>
+                    {BOARD_OPTIONS.map((b) => (
+                      <option key={b.value} value={b.value}>
+                        {b.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -257,7 +272,7 @@ export default function SignUpPage() {
                   Preferred Tutoring Mode
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {["Online (1-on-1 Interactive)", "In-Person Physical (Home Visit)"].map((modeOption) => (
+                  {STUDENT_MODE_OPTIONS.map((modeOption) => (
                     <label
                       key={modeOption}
                       className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer text-xs font-semibold transition-all ${

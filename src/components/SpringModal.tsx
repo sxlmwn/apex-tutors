@@ -2,9 +2,17 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2 } from "lucide-react";
+import { X, CheckCircle2, ChevronDown } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 import { backdropVariants, springModalVariants } from "@/lib/motion";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
+import { buildStudentWhatsAppLink } from "@/lib/whatsapp-link";
+import {
+  CITY_OPTIONS,
+  GRADE_OPTIONS,
+  BOARD_OPTIONS,
+  STUDENT_MODE_OPTIONS,
+} from "@/lib/form-options";
 
 export default function SpringModal() {
   const { isModalOpen, closeModal } = useModal();
@@ -12,9 +20,15 @@ export default function SpringModal() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    classLevel: "Matric (9th / 10th)",
     city: "Lahore",
+    area: "",
+    grade: "FSc Pre-Medical",
+    board: "Federal Board (FBISE)",
+    mode: "Online (1-on-1 Interactive)",
+    notes: "",
   });
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
+  const [showExtraDetails, setShowExtraDetails] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,8 +47,12 @@ export default function SpringModal() {
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
-          grade: formData.classLevel,
           city: formData.city,
+          area: formData.area,
+          grade: formData.grade,
+          board: formData.board,
+          mode: formData.mode,
+          notes: formData.notes,
           source: "modal",
           hp,
         }),
@@ -51,6 +69,7 @@ export default function SpringModal() {
         throw new Error(message);
       }
 
+      setSubmittedData({ ...formData });
       setSubmitted(true);
     } catch (err: unknown) {
       const message =
@@ -67,12 +86,18 @@ export default function SpringModal() {
     setSubmitted(false);
     setErrorMessage(null);
     setHp("");
+    setShowExtraDetails(false);
     setFormData({
       name: "",
       phone: "",
-      classLevel: "Matric (9th / 10th)",
       city: "Lahore",
+      area: "",
+      grade: "FSc Pre-Medical",
+      board: "Federal Board (FBISE)",
+      mode: "Online (1-on-1 Interactive)",
+      notes: "",
     });
+    setSubmittedData(null);
     closeModal();
   };
 
@@ -96,12 +121,12 @@ export default function SpringModal() {
             animate="animate"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg bg-[#FAF7F2] border border-[#E8E1D5]/80 rounded-3xl p-6 sm:p-10 text-[#18181B] relative cursor-default overflow-hidden my-auto"
+            className="w-full max-w-lg bg-[#FAF7F2] border border-[#E8E1D5]/80 rounded-3xl p-6 sm:p-8 text-[#18181B] relative cursor-default max-h-[90vh] overflow-y-auto my-auto"
           >
             {/* Close Button (X) */}
             <button
               onClick={closeModal}
-              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-[#EAE2D4] hover:bg-[#DDD3C2] text-[#18181B] flex items-center justify-center transition-colors focus:outline-none cursor-pointer"
+              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-[#EAE2D4] hover:bg-[#DDD3C2] text-[#18181B] flex items-center justify-center transition-colors focus:outline-none cursor-pointer z-10"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -121,15 +146,32 @@ export default function SpringModal() {
                   Demo Request Received
                 </h3>
                 <p className="text-sm text-[#52525B] max-w-sm mx-auto leading-relaxed">
-                  Thanks, <span className="font-semibold text-[#18181B]">{formData.name}</span>! We will match you with a verified university tutor in{" "}
-                  <span className="font-semibold text-[#18181B]">{formData.city}</span> soon. Expect a WhatsApp message shortly.
+                  Thanks, <span className="font-semibold text-[#18181B]">{submittedData?.name || formData.name}</span>! We will match you with a verified university tutor in{" "}
+                  <span className="font-semibold text-[#18181B]">{submittedData?.city || formData.city}</span> soon. Expect a WhatsApp message shortly.
                 </p>
 
-                <div className="pt-4">
+                <div className="pt-4 space-y-3">
+                  {submittedData && (
+                    <div className="space-y-1.5">
+                      <a
+                        href={buildStudentWhatsAppLink(submittedData)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-medium text-sm transition-all shadow-xs hover:shadow-sm active:scale-95 cursor-pointer"
+                      >
+                        <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                        <span>Send this on WhatsApp too</span>
+                      </a>
+                      <p className="text-xs text-[#71717A]">
+                        Optional: this speeds up our reply.
+                      </p>
+                    </div>
+                  )}
+
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="w-full py-3.5 px-6 rounded-full bg-[#2E8B57] hover:bg-[#236d44] text-white font-medium text-sm transition-all"
+                    className="w-full py-3.5 px-6 rounded-full bg-[#2E8B57] hover:bg-[#236d44] text-white font-medium text-sm transition-all cursor-pointer"
                   >
                     Done
                   </button>
@@ -137,9 +179,9 @@ export default function SpringModal() {
               </motion.div>
             ) : (
               /* Lead Capture Form */
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {/* Header Info */}
-                <div className="space-y-2 pr-8">
+                <div className="space-y-1.5 pr-8">
                   <span className="text-xs font-semibold uppercase tracking-widest text-[#52525B]">
                     Free Demo Class
                   </span>
@@ -151,11 +193,11 @@ export default function SpringModal() {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3.5">
                   {/* Student Name */}
                   <div>
                     <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
-                      Student Name
+                      Student Name *
                     </label>
                     <input
                       type="text"
@@ -163,14 +205,14 @@ export default function SpringModal() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Ahmed Khan"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
+                      className="w-full px-4 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
                     />
                   </div>
 
                   {/* WhatsApp Phone */}
                   <div>
                     <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
-                      Phone Number (WhatsApp)
+                      Phone Number (WhatsApp) *
                     </label>
                     <input
                       type="tel"
@@ -178,51 +220,132 @@ export default function SpringModal() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="0300 1234567"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
+                      className="w-full px-4 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
                     />
                   </div>
 
-                  {/* Class Level & City Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {/* Class Level Dropdown */}
+                  {/* Row 1: City & Grade */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
                     <div>
                       <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
-                        Class Level
+                        City *
                       </label>
                       <select
-                        value={formData.classLevel}
-                        onChange={(e) => setFormData({ ...formData, classLevel: e.target.value })}
-                        className="w-full px-3.5 py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
+                        required
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
                       >
-                        <option value="Primary (Grades 1-8)">Primary (Grades 1-8)</option>
-                        <option value="Matric (9th / 10th)">Matric (9th / 10th)</option>
-                        <option value="FSc Pre-Engineering">FSc Pre-Engineering</option>
-                        <option value="FSc Pre-Medical">FSc Pre-Medical</option>
-                        <option value="ICS (Computer Science)">ICS (Computer Science)</option>
-                        <option value="O Level">O Level (Cambridge / Edexcel)</option>
-                        <option value="A Level">A Level (AS / A2)</option>
+                        {CITY_OPTIONS.map((c) => (
+                          <option key={c.value} value={c.value}>
+                            {c.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
-                    {/* City Dropdown */}
                     <div>
                       <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
-                        City
+                        Academic Grade *
                       </label>
                       <select
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="w-full px-3.5 py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
+                        required
+                        value={formData.grade}
+                        onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
                       >
-                        <option value="Karachi">Karachi</option>
-                        <option value="Lahore">Lahore</option>
-                        <option value="Islamabad">Islamabad</option>
-                        <option value="Rawalpindi">Rawalpindi</option>
-                        <option value="Multan">Multan</option>
-                        <option value="Faisalabad">Faisalabad</option>
-                        <option value="Bahawalpur">Bahawalpur</option>
+                        {GRADE_OPTIONS.map((g) => (
+                          <option key={g.value} value={g.value}>
+                            {g.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
+                  </div>
+
+                  {/* Row 2: Board & Mode */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+                    <div>
+                      <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
+                        Exam Board *
+                      </label>
+                      <select
+                        required
+                        value={formData.board}
+                        onChange={(e) => setFormData({ ...formData, board: e.target.value })}
+                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
+                      >
+                        {BOARD_OPTIONS.map((b) => (
+                          <option key={b.value} value={b.value}>
+                            {b.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
+                        Tutoring Mode *
+                      </label>
+                      <select
+                        required
+                        value={formData.mode}
+                        onChange={(e) => setFormData({ ...formData, mode: e.target.value })}
+                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all"
+                      >
+                        {STUDENT_MODE_OPTIONS.map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Optional Extra Details Toggle */}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => setShowExtraDetails(!showExtraDetails)}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#2E8B57] hover:text-[#236d44] transition-colors cursor-pointer py-1"
+                    >
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          showExtraDetails ? "rotate-180" : ""
+                        }`}
+                      />
+                      <span>{showExtraDetails ? "Hide additional details" : "Add more details (optional)"}</span>
+                    </button>
+
+                    {showExtraDetails && (
+                      <div className="mt-2.5 space-y-3 pt-1">
+                        <div>
+                          <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
+                            Area / Sector / Society
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. DHA Phase 5 / Bahria Town"
+                            value={formData.area}
+                            onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                            className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-medium text-[#18181B] uppercase tracking-wider mb-1.5">
+                            Specific Subjects or Needs
+                          </label>
+                          <textarea
+                            rows={2}
+                            placeholder="e.g. Need urgent help with Physics numericals..."
+                            value={formData.notes}
+                            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                            className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E8E1D5] focus:border-[#2E8B57] focus:ring-1 focus:ring-[#2E8B57] outline-none text-sm text-[#18181B] transition-all placeholder:text-[#A1A1AA]"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Honeypot Spam Trap (visually hidden) */}
