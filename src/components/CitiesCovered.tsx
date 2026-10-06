@@ -76,7 +76,7 @@ export default function CitiesCovered() {
           backgroundColor="#F5F0E8"
           textColor="#18181B"
           mutedColor="#52525B"
-          rounded={20}
+          rounded={16}
           showCounter={true}
         />
       </div>

@@ -27,7 +27,7 @@ export default function Footer() {
                 <span className="text-lg font-bold tracking-tight text-white leading-none">
                   Apex<span className="text-[#2E8B57]">Tutors</span>
                 </span>
-                <span className="text-[10px] font-medium text-[#71717A] tracking-wider uppercase mt-0.5">
+                <span className="text-[0.625rem] font-medium text-[#71717A] tracking-wider uppercase mt-0.5">
                   Pakistan
                 </span>
               </div>

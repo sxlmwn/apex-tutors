@@ -187,7 +187,7 @@ export default function ApplyTutorPage() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-[#18181B]">Rs. 40k–90k+/mo</p>
-                  <p className="text-[11px] text-[#71717A]">Competitive hourly pay</p>
+                  <p className="text-[0.6875rem] text-[#71717A]">Competitive hourly pay</p>
                 </div>
               </div>
               <div className="bg-[#FAF7F2] rounded-2xl p-4 border border-[#E8E1D5] flex items-center gap-3">
@@ -196,7 +196,7 @@ export default function ApplyTutorPage() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-[#18181B]">Flexible Hours</p>
-                  <p className="text-[11px] text-[#71717A]">Teach around classes</p>
+                  <p className="text-[0.6875rem] text-[#71717A]">Teach around classes</p>
                 </div>
               </div>
               <div className="bg-[#FAF7F2] rounded-2xl p-4 border border-[#E8E1D5] flex items-center gap-3">
@@ -205,7 +205,7 @@ export default function ApplyTutorPage() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-[#18181B]">Verified Badge</p>
-                  <p className="text-[11px] text-[#71717A]">CV &amp; career booster</p>
+                  <p className="text-[0.6875rem] text-[#71717A]">CV &amp; career booster</p>
                 </div>
               </div>
             </div>

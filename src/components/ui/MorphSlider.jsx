@@ -718,7 +718,7 @@ export default function MorphSlider({
     <div
       className={`morph-slider ${className}`.trim()}
       style={{
-        borderRadius: `${radius}px`,
+        borderRadius: typeof radius === 'number' ? `${radius * 0.0625}rem` : radius,
         '--ms-swap': `${(duration * 0.66).toFixed(3)}s`,
         '--ms-dot': `${(duration * 0.45).toFixed(3)}s`
       }}
@@ -729,7 +729,7 @@ export default function MorphSlider({
       <div
         className="morph-slider-frame"
         style={{
-          borderRadius: `${radius}px`
+          borderRadius: typeof radius === 'number' ? `${radius * 0.0625}rem` : radius
         }}
       >
         <div
@@ -792,7 +792,7 @@ export default function MorphSlider({
             aria-label="Previous slide"
             onClick={handlePrev}
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
               <path
                 d="M15 5l-7 7 7 7"
                 fill="none"
@@ -809,7 +809,7 @@ export default function MorphSlider({
             aria-label="Next slide"
             onClick={handleNext}
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
               <path
                 d="M9 5l7 7-7 7"
                 fill="none"

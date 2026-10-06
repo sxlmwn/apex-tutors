@@ -139,16 +139,16 @@ export default function GsapFlipCard({
   backgroundColor = "#e9e9e7",
   textColor = "#111111",
   mutedColor = "#8a8a86",
-  rounded = 20,
-  thumbWidth = 92,
-  thumbHeight = 96,
-  thumbGap = 8,
-  heroWidth = 530,
-  heroHeight = 620,
+  rounded = 16,
+  thumbWidth = 74,
+  thumbHeight = 77,
+  thumbGap = 6.5,
+  heroWidth = 424,
+  heroHeight = 496,
   duration = 0.7,
   ease = "power3.inOut",
-  stackOffsetX = 3,
-  stackOffsetY = 9,
+  stackOffsetX = 2.4,
+  stackOffsetY = 7.2,
   stackRotation = 0,
   showCounter = true,
   captionLines = 2,
@@ -219,11 +219,11 @@ export default function GsapFlipCard({
   const gap = thumbGap * scale;
   const hW = Math.min(heroWidth * scale, stageWidth * 0.46);
   const hH = heroHeight * (hW / heroWidth || 1);
-  const railX = Math.max(24, stageWidth * 0.045);
+  const railX = Math.max(19, stageWidth * 0.045);
   const heroX = stageWidth - hW - railX;
-  const panelLeft = railX + tW + Math.max(32, stageWidth * 0.035);
-  const panelMaxWidth = Math.min(480, Math.max(280, heroX - panelLeft - 24));
-  const stackWidth = Math.min(215 * scale, stageWidth * 0.42);
+  const panelLeft = railX + tW + Math.max(26, stageWidth * 0.035);
+  const panelMaxWidth = Math.min(384, Math.max(224, heroX - panelLeft - 19));
+  const stackWidth = Math.min(172 * scale, stageWidth * 0.42);
   const stackHeight = stackWidth * 1.5;
 
   const slotBox = useCallback(
@@ -336,11 +336,7 @@ export default function GsapFlipCard({
   const activeDescription = reducedMotion ? nextDescription : shownDescription;
 
   useEffect(() => {
-    if (reducedMotion) {
-      setShownTitle(nextTitle);
-      setShownDescription(nextDescription);
-      return;
-    }
+    if (reducedMotion) return;
 
     const titleNeedsChange = nextTitle !== shownTitle;
     const descNeedsChange = nextDescription !== shownDescription;
@@ -358,6 +354,7 @@ export default function GsapFlipCard({
 
     if (!targets.length) {
       revertCaptionSplit();
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (titleNeedsChange) setShownTitle(nextTitle);
       if (descNeedsChange) setShownDescription(nextDescription);
       return;
@@ -578,7 +575,7 @@ export default function GsapFlipCard({
   return (
     <div
       ref={rootRef}
-      className={`hxs-gsap-flip-card relative w-full min-h-[max(780px,100svh)] lg:min-h-[max(840px,100svh)] overflow-hidden ${className}`}
+      className={`hxs-gsap-flip-card relative w-full min-h-[max(48.75rem,100svh)] lg:min-h-[max(52.5rem,100svh)] overflow-hidden ${className}`}
       style={{ background: backgroundColor, color: textColor }}
     >
       {showCounter && (
@@ -596,7 +593,7 @@ export default function GsapFlipCard({
         onClick={(e) => {
           if (e.target === e.currentTarget) close();
         }}
-        className={`relative w-full min-h-[max(780px,100svh)] lg:min-h-[max(840px,100svh)] ${opened ? "cursor-pointer" : "cursor-default"}`}
+        className={`relative w-full min-h-[max(48.75rem,100svh)] lg:min-h-[max(52.5rem,100svh)] ${opened ? "cursor-pointer" : "cursor-default"}`}
       >
         <div
           className={`absolute top-1/2 -translate-y-1/2 w-full z-30 pointer-events-none ${
@@ -620,7 +617,7 @@ export default function GsapFlipCard({
           <div className="mt-[0.5vw] min-h-[3.5rem]">
             <p
               ref={captionRef}
-              className="text-[15px] xl:text-[16px] w-full text-left leading-[1.65] m-0 text-[#52525B]"
+              className="text-sm xl:text-base w-full text-left leading-[1.65] m-0 text-[#52525B]"
             >
               {activeDescription}
             </p>

@@ -81,7 +81,7 @@ export function NavBar({ items, className }: NavBarProps) {
                 isActive && "bg-[#2E8B57]/10 text-[#2E8B57]",
               )}
             >
-              <Icon size={18} strokeWidth={2.5} />
+              <Icon size={15} strokeWidth={2.5} />
               {isActive && (
                 <motion.div
                   layoutId="lamp"

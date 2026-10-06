@@ -45,7 +45,7 @@ export default function SubjectsBoards() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Image Showcase */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[460px]">
+              <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[28.75rem]">
                 <Image
                   src="/images/study-smart/read-less-recall-more.jpg"
                   alt="Study Smart — Read Less, Recall More (Active Recall Method)"
@@ -71,7 +71,7 @@ export default function SubjectsBoards() {
                 {boards.map((b) => (
                   <div key={b.name} className="bg-[#F5F0E8] p-3 rounded-xl border border-[#E8E1D5]/40 text-xs">
                     <p className="font-bold text-[#18181B]">{b.name}</p>
-                    <p className="text-[11px] text-[#71717A] mt-0.5">{b.desc}</p>
+                    <p className="text-[0.6875rem] text-[#71717A] mt-0.5">{b.desc}</p>
                   </div>
                 ))}
               </div>
@@ -80,7 +80,7 @@ export default function SubjectsBoards() {
         </div>
 
         {/* Landscape MorphSlider replacing the card grid */}
-        <div style={{ width: "100%", maxWidth: "1000px", margin: "0 auto", aspectRatio: "16 / 9", position: "relative" }}>
+        <div style={{ width: "100%", maxWidth: "62.5rem", margin: "0 auto", aspectRatio: "16 / 9", position: "relative" }}>
           <MorphSlider
             items={subjectSlides}
             transition="melt"

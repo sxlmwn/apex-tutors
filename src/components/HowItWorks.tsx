@@ -93,7 +93,7 @@ export default function HowItWorks() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             {/* Supporting Visual Image */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[460px]">
+              <div className="relative rounded-2xl overflow-hidden aspect-4/5 max-h-[28.75rem]">
                 <Image
                   src="/images/study-smart/hard-not-smart.jpg"
                   alt="Study Smart — 5 Signs You're Studying Hard Not Smart"
@@ -119,7 +119,7 @@ export default function HowItWorks() {
               <div className="pt-2">
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full transition-all min-h-[44px]"
+                  className="inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full transition-all min-h-11"
                 >
                   Book Your Free Demo Class
                 </Link>

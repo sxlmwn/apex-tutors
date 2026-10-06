@@ -9,7 +9,7 @@ export default function Hero() {
   const { openModal } = useModal();
 
   return (
-    <section className="relative overflow-hidden w-full h-[calc(100dvh-70px)] sm:h-auto sm:min-h-[calc(100vh-80px)] min-h-[560px] flex flex-col justify-between items-center lg:flex-row bg-[#F5F0E8]">
+    <section className="relative overflow-hidden w-full h-[calc(100dvh-4.375rem)] sm:h-auto sm:min-h-[calc(100vh-5rem)] min-h-[35rem] flex flex-col justify-between items-center lg:flex-row bg-[#F5F0E8]">
       {/* Main Content Container */}
       <div className="w-full h-full px-6 sm:px-8 lg:px-12 xl:px-16 pt-4 pb-28 sm:pt-10 sm:pb-20 lg:py-28 relative z-20 flex flex-col justify-between lg:block lg:h-auto">
         <div className="w-full h-full lg:h-auto lg:w-[52%] xl:w-[48%] max-w-2xl xl:max-w-3xl flex flex-col justify-between lg:block lg:space-y-8 text-center lg:text-left">
@@ -47,13 +47,13 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={openModal}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full transition-all active:scale-95 cursor-pointer shadow-lg hover:shadow-xl min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white bg-[#2E8B57] hover:bg-[#236d44] rounded-full transition-all active:scale-95 cursor-pointer shadow-lg hover:shadow-xl min-h-11"
               >
                 Find a Tutor
               </button>
               <Link
                 href="/apply-tutor"
-                className="hidden sm:inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 text-sm sm:text-base font-medium text-[#18181B] bg-transparent hover:bg-[#18181B]/5 border border-[#18181B]/20 rounded-full transition-all min-h-[44px]"
+                className="hidden sm:inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 text-sm sm:text-base font-medium text-[#18181B] bg-transparent hover:bg-[#18181B]/5 border border-[#18181B]/20 rounded-full transition-all min-h-11"
               >
                 Become a Tutor
               </Link>

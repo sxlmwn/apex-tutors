@@ -45,7 +45,7 @@ export default function TrustVerification() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* Visual Showcase */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:max-w-none w-full min-h-[440px] sm:min-h-[500px] lg:min-h-[520px]">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:max-w-none w-full min-h-[27.5rem] sm:min-h-[31.25rem] lg:min-h-[32.5rem]">
               <Image
                 src="/images/apex-tutor-verified.jpg"
                 alt="Verified Apex Tutors tutor"
@@ -65,7 +65,7 @@ export default function TrustVerification() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#18181B]">100% Background Verified</p>
-                    <p className="text-[11px] text-[#71717A]">NADRA CNIC + University Enrollment</p>
+                    <p className="text-[0.6875rem] text-[#71717A]">NADRA CNIC + University Enrollment</p>
                   </div>
                 </div>
               </div>
