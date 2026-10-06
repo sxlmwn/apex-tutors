@@ -89,9 +89,9 @@ export default function TestimonialsStats() {
 
               <div className="mt-8 pt-4 border-t border-[#E8E1D5]/60 flex items-end justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-[#18181B]">
+                  <h3 className="text-sm font-bold text-[#18181B]">
                     {t.name}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#71717A] mt-0.5">
                     {t.role} • {t.location}
                   </p>

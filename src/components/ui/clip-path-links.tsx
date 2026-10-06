@@ -81,14 +81,14 @@ const LinkBox: React.FC<LinkBoxProps> = ({ Icon, href, label }) => {
       onMouseLeave={handleMouseLeave}
       className="relative grid h-16 w-full place-content-center sm:h-20"
     >
-      <Icon className="text-lg text-[#18181B] sm:text-xl" />
+      <Icon aria-hidden="true" focusable="false" className="text-lg text-[#18181B] sm:text-xl" />
 
       <div
         ref={scope}
         style={{ clipPath: BOTTOM_RIGHT_CLIP }}
         className="absolute inset-0 grid place-content-center bg-[#18181B] text-white"
       >
-        <Icon className="text-lg sm:text-xl" />
+        <Icon aria-hidden="true" focusable="false" className="text-lg sm:text-xl" />
       </div>
     </a>
   );

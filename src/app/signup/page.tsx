@@ -109,7 +109,7 @@ export default function SignUpPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 w-full">
+      <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-10 w-full">
         {submitted ? (
           <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-lg border border-slate-200/80 text-center space-y-5 animate-in fade-in zoom-in-95 duration-300">
             <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#2E8B57] flex items-center justify-center mx-auto">
