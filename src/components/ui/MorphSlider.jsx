@@ -191,12 +191,38 @@ void main() {
 `;
 
 function makeFallbackTexture(gl) {
+  if (typeof document !== 'undefined') {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 120;
+      canvas.height = 68;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const grad = ctx.createLinearGradient(0, 0, 120, 68);
+        grad.addColorStop(0, '#1c3d2e');
+        grad.addColorStop(0.5, '#244e3b');
+        grad.addColorStop(1, '#2e8b57');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 120, 68);
+
+        // Subtle geometric card accent
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.beginPath();
+        ctx.arc(60, 34, 28, 0, Math.PI * 2);
+        ctx.fill();
+
+        return new Texture(gl, { image: canvas, generateMipmaps: false });
+      }
+    } catch {
+      // Fallback to data texture if canvas creation fails
+    }
+  }
   const size = 4;
   const data = new Uint8Array(size * size * 4);
   for (let i = 0; i < size * size; i++) {
-    data[i * 4] = 24;
-    data[i * 4 + 1] = 24;
-    data[i * 4 + 2] = 28;
+    data[i * 4] = 36;
+    data[i * 4 + 1] = 78;
+    data[i * 4 + 2] = 59;
     data[i * 4 + 3] = 255;
   }
   return new Texture(gl, { image: data, width: size, height: size, generateMipmaps: false });
@@ -244,7 +270,9 @@ class MorphEngine {
     this.geometry = new Triangle(this.gl);
 
     this.textures = this.items.map(() => makeFallbackTexture(this.gl));
-    this.sizes = this.items.map(() => [1, 1]);
+    this.sizes = this.items.map(() => [1200, 627]);
+    this.ready = this.items.map(() => false);
+    this.loadPromises = [];
 
     const opts = this.getOptions();
     this.program = new Program(this.gl, {
@@ -286,21 +314,81 @@ class MorphEngine {
   }
 
   loadTextures() {
-    this.items.forEach((item, index) => {
+    this.loadPromises = this.items.map((item, index) => this.preloadItem(index));
+  }
+
+  preloadItem(index) {
+    const item = this.items[index];
+    if (!item?.image) {
+      this.ready[index] = true;
+      return Promise.resolve(this.textures[index]);
+    }
+
+    return new Promise(resolve => {
       const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = item.image;
-      img.onload = () => {
+      const isCross =
+        typeof window !== 'undefined' &&
+        /^https?:\/\//i.test(item.image) &&
+        !item.image.startsWith(window.location.origin);
+      if (isCross) {
+        img.crossOrigin = 'anonymous';
+      }
+
+      const onDone = async () => {
+        try {
+          if (img.decode) {
+            await img.decode();
+          }
+        } catch {
+          // If decode fails or is interrupted, proceed with available dimensions
+        }
+
+        let uploadSource = img;
+        let w = img.naturalWidth || img.width || 1200;
+        let h = img.naturalHeight || img.height || 627;
+
+        // Defensive guard: Ensure image dimensions never exceed GPU's MAX_TEXTURE_SIZE on mobile
+        const maxTexSize = (this.gl && this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE)) || 4096;
+        if (w > maxTexSize || h > maxTexSize) {
+          const scale = Math.min(maxTexSize / w, maxTexSize / h);
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(Math.floor(w * scale), 1);
+          canvas.height = Math.max(Math.floor(h * scale), 1);
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            uploadSource = canvas;
+            w = canvas.width;
+            h = canvas.height;
+          }
+        }
+
         const texture = new Texture(this.gl, { generateMipmaps: false });
-        texture.image = img;
+        texture.image = uploadSource;
         this.textures[index] = texture;
-        this.sizes[index] = [img.naturalWidth || 1, img.naturalHeight || 1];
+        this.sizes[index] = [w, h];
+        this.ready[index] = true;
+
         if (index === this.current) {
           this.program.uniforms.tCurrent.value = texture;
           this.program.uniforms.uCurrentSize.value = this.sizes[index];
         }
+        resolve(texture);
       };
-      img.onerror = () => {};
+
+      const onError = () => {
+        console.warn(`[MorphSlider] Failed to load slide image at index ${index}:`, item.image);
+        this.ready[index] = true;
+        resolve(this.textures[index]);
+      };
+
+      img.onload = onDone;
+      img.onerror = onError;
+      img.src = item.image;
+
+      if (img.complete && img.naturalWidth > 0) {
+        onDone();
+      }
     });
   }
 
@@ -340,19 +428,28 @@ class MorphEngine {
     this.program.uniforms.uCurrentSize.value = this.sizes[this.current];
     this.program.uniforms.tNext.value = this.textures[target];
     this.program.uniforms.uNextSize.value = this.sizes[target];
-    this.program.uniforms.uDir.value = dir;
+    this.program.uniforms.uDir.value = dir > 0 ? 1 : -1;
     return target;
   }
 
-  goTo(dir) {
+  async goTo(dir) {
     if (this.animating || this.dragging || this.items.length < 2) return;
     const opts = this.getOptions();
     if (!opts.loop) {
       const raw = this.current + dir;
       if (raw < 0 || raw > this.items.length - 1) return;
     }
+
+    const target = this.wrap(this.current + dir);
+
+    // Preload & ensure target slide texture is ready before morphing
+    if (!this.ready[target] && this.loadPromises[target]) {
+      await this.loadPromises[target];
+      if (this.animating || this.dragging) return;
+    }
+
     this.syncOptions();
-    const target = this.prepareNext(dir);
+    this.prepareNext(dir);
     this.animating = true;
     this.announce(target);
     const duration = this.reducedMotion ? Math.min(opts.duration, 0.4) : opts.duration;
@@ -366,6 +463,11 @@ class MorphEngine {
         onComplete: () => this.commit(target)
       }
     );
+  }
+
+  goToIndex(target) {
+    if (this.animating || this.dragging || target === this.current) return;
+    this.goTo(target - this.current);
   }
 
   announce(index) {
@@ -424,12 +526,19 @@ class MorphEngine {
     this.announce(progress > 0.5 ? this.wrap(this.current + dir) : this.current);
   }
 
-  endDrag() {
+  async endDrag() {
     if (!this.dragging) return;
     this.dragging = false;
     const p = this.program.uniforms.uProgress.value;
     if (this.dragDir === 0) return;
     const target = this.wrap(this.current + this.dragDir);
+
+    if (p > 0.4 && !this.ready[target] && this.loadPromises[target]) {
+      await this.loadPromises[target];
+      this.program.uniforms.tNext.value = this.textures[target];
+      this.program.uniforms.uNextSize.value = this.sizes[target];
+    }
+
     const duration = this.reducedMotion ? 0.3 : 0.5;
     this.animating = true;
     if (p > 0.4) {
@@ -500,8 +609,20 @@ export default function MorphSlider({
   const [index, setIndex] = useState(startIndex);
   const [hovering, setHovering] = useState(false);
 
-  const optsRef = useRef();
-  optsRef.current = { transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop };
+  const optsRef = useRef({ transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop });
+  useEffect(() => {
+    optsRef.current = { transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop };
+  }, [transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop]);
+
+  useEffect(() => {
+    // Eagerly preload all slide images into browser cache
+    items.forEach(item => {
+      if (item?.image && typeof window !== 'undefined') {
+        const img = new Image();
+        img.src = item.image;
+      }
+    });
+  }, [items]);
 
   useEffect(() => {
     if (!containerRef.current) return undefined;
@@ -522,7 +643,6 @@ export default function MorphSlider({
       engine.destroy();
       engineRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, startIndex]);
 
   const handleNext = useCallback(() => engineRef.current?.next(), []);
@@ -656,7 +776,7 @@ export default function MorphSlider({
                 onClick={() => {
                   const engine = engineRef.current;
                   if (!engine || i === index) return;
-                  engine.goTo(i > index ? 1 : -1);
+                  engine.goToIndex(i);
                 }}
               />
             ))}

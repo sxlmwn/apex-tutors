@@ -4,14 +4,14 @@ import Image from "next/image";
 import MorphSlider from "@/components/ui/MorphSlider";
 
 const subjectSlides = [
-  { image: "/images/subjects/primary.jpg", caption: "Primary & Middle School", description: "Building strong foundations from Grade 1 to 8." },
-  { image: "/images/subjects/o-level.png", caption: "O Level / IGCSE", description: "Structured past-paper drills for straight A*s." },
-  { image: "/images/subjects/a-level.png", caption: "A Level (AS & A2)", description: "Advanced concepts and university entry preparation." },
-  { image: "/images/subjects/fsc-pre-medical.png", caption: "FSc Pre-Medical", description: "Complete board syllabus with conceptual clarity." },
-  { image: "/images/subjects/fsc-pre-engineering.png", caption: "FSc Pre-Engineering", description: "Calculus, derivations, and numericals mastered." },
-  { image: "/images/subjects/ics.png", caption: "ICS (Computer Science)", description: "Practical coding and algorithm fundamentals covered." },
-  { image: "/images/subjects/matric.png", caption: "Matric (9th & 10th Grade)", description: "Focused board-pattern preparation for top marks." },
-  { image: "/images/subjects/general-board-revision.png", caption: "Crash Course", description: "High-yield topics and marking-scheme drills." },
+  { image: "/images/subjects/primary.webp", caption: "Primary & Middle School", description: "Building strong foundations from Grade 1 to 8." },
+  { image: "/images/subjects/o-level.webp", caption: "O Level / IGCSE", description: "Structured past-paper drills for straight A*s." },
+  { image: "/images/subjects/a-level.webp", caption: "A Level (AS & A2)", description: "Advanced concepts and university entry preparation." },
+  { image: "/images/subjects/fsc-pre-medical.webp", caption: "FSc Pre-Medical", description: "Complete board syllabus with conceptual clarity." },
+  { image: "/images/subjects/fsc-pre-engineering.webp", caption: "FSc Pre-Engineering", description: "Calculus, derivations, and numericals mastered." },
+  { image: "/images/subjects/ics.webp", caption: "ICS (Computer Science)", description: "Practical coding and algorithm fundamentals covered." },
+  { image: "/images/subjects/matric.webp", caption: "Matric (9th & 10th Grade)", description: "Focused board-pattern preparation for top marks." },
+  { image: "/images/subjects/general-board-revision.webp", caption: "Crash Course", description: "High-yield topics and marking-scheme drills." },
 ];
 
 export default function SubjectsBoards() {
